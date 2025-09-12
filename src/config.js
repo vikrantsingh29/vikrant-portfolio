@@ -1,12 +1,13 @@
 export const SITE = {
     name: 'Vikrant Singh',
     role: 'AI/ML Engineer & Software Developer',
-    headline: 'Building intuitive AI-powered web experiences',
-    subhead: "I'm Vikrant, an AI/ML Engineer crafting reliable, fast, and human-centered systems.",
+    headline: 'Building innovative AI-driven solutions with 7+ years of experience',
+    subhead: "AI/ML Engineer with expertise in LLMs, RAG systems, and scalable backend architectures. Passionate about creating intelligent systems that solve real-world problems.",
     email: 'singhvikrant29@gmail.com',
+    phone: '+49-15906343533',
     location: 'Bonn, Germany',
     socials: {
-        github: 'https://github.com/your-username',
+        github: 'https://github.com/vikrantsingh29',
         linkedin: 'https://linkedin.com/in/vikrantsingh29'
     },
 }
@@ -16,61 +17,96 @@ export const PROJECTS = [
     {
         slug: 'thesis-knowledge-graph-embeddings',
         title: 'Master Thesis — Knowledge Graph Embeddings',
-        description: 'Function-based KGE + NAS to improve accuracy and reduce LLM hallucinations.',
-        stack: ['PyTorch', 'NAS', 'Knowledge Graphs'],
+        description: 'Developed function-based KGE with Neural Architecture Search to improve accuracy and reduce LLM hallucinations by integrating structured knowledge.',
+        stack: ['PyTorch', 'NAS', 'Knowledge Graphs', 'LLMs'],
         image: '/assets/thesis.jpg',
     },
     {
         slug: 'step-counting-sensor-data',
         title: 'Step Counting with Sensor Data',
-        description: 'From raw IMU to accurate left-right step counts using GRU and RF.',
-        stack: ['Python', 'SciPy', 'PyTorch', 'XGBoost'],
+        description: 'Processed raw IMU data with Butterworth filtering and peak detection. Achieved lowest error with GRU model (MSE ≈ 3.68) for accurate left-right step counting.',
+        stack: ['Python', 'PyTorch', 'LSTM', 'GRU', 'Random Forest', 'XGBoost'],
         image: '/assets/steps.jpg',
     },
     {
         slug: 'email-rag-langgraph',
         title: 'RAG with LangGraph on Email Data',
-        description: 'Private, contextual QA over personal mailbox with LangGraph.',
-        stack: ['LangGraph', 'Flask', 'RAG'],
+        description: 'Implemented RAG pipeline using LangGraph for contextual querying of personal email data with applications in automated drafting and intelligent search.',
+        stack: ['LangGraph', 'Flask', 'RAG', 'Python'],
         image: '/assets/rag.jpg',
     },
     {
         slug: 'financial-markets-strategy',
         title: 'Financial Market Investment Strategies',
-        description: 'Time-series forecasting & derivatives pricing for portfolio optimization.',
-        stack: ['Prophet', 'Quantlib', 'TensorFlow'],
+        description: 'Developed predictive models using LSTM and Prophet for crypto/stock markets. Integrated Yahoo Finance & Bloomberg APIs with Quantlib for derivatives pricing.',
+        stack: ['Prophet', 'Quantlib', 'TensorFlow', 'LSTM', 'Bloomberg API'],
         image: '/assets/finance.jpg',
+    },
+    {
+        slug: 'cycling-tour-prediction',
+        title: 'Cycling Tour Prediction',
+        description: 'Designed NLP pipeline with Hugging Face NER and Facebook BART for zero-shot classification. Integrated geospatial filtering for cycling route recommendations.',
+        stack: ['Hugging Face', 'BART', 'NLP', 'Geospatial Analysis', 'Python'],
+        image: '/assets/cycling.jpg',
     },
 ]
 
 
 export const SKILLS = {
-    'Programming Languages': ['Python', 'C++', 'Java', 'JavaScript', 'TypeScript', 'SQL'],
-    'AI/ML Frameworks': ['PyTorch', 'TensorFlow', 'Scikit-learn', 'Hugging Face', 'LangChain', 'LangGraph'],
-    'Web Technologies': ['React', 'Node.js', 'Flask', 'FastAPI', 'HTML/CSS', 'Tailwind CSS'],
-    'Cloud & DevOps': ['AWS', 'Docker', 'Kubernetes', 'Git', 'CI/CD', 'Linux'],
-    'Data & Analytics': ['Pandas', 'NumPy', 'SciPy', 'Matplotlib', 'Jupyter', 'Apache Spark'],
-    'Databases': ['PostgreSQL', 'MongoDB', 'Redis', 'Elasticsearch', 'Vector DBs']
+    'Programming Languages': ['Python', 'C++', 'Java', 'SQL'],
+    'AI/ML & LLMs': ['PyTorch', 'TensorFlow', 'Hugging Face', 'LangChain', 'LangGraph', 'Autogen', 'RAG', 'NAS', 'Transformers'],
+    'Backend & APIs': ['Flask', 'FastAPI', 'REST APIs', 'Microservices', 'RabbitMQ', 'Redis'],
+    'Data Engineering': ['ETL', 'dbt', 'Azure Data Services', 'Pandas', 'NumPy'],
+    'Web Scraping': ['Playwright', 'Scrapy', 'Selenium', 'httpx'],
+    'Data Visualization': ['Matplotlib', 'Seaborn', 'Plotly', 'Power BI', 'Grafana'],
+    'Databases': ['MySQL', 'PostgreSQL', 'ChromaDB', 'ElasticSearch', 'Snowflake'],
+    'Cloud & DevOps': ['Azure', 'Docker', 'Git', 'Prometheus', 'Loki', 'Sentry'],
+    'Geospatial': ['QGIS', 'PostGIS', 'GDAL'],
+    'Other Tools': ['Jupyter', 'n8n', 'Agile/Scrum']
 }
 
 
 export const TIMELINE = [
     {
-        year: '2023-Present',
+        year: 'Jan 2025 – Present',
         title: 'AI/ML Engineer',
-        company: 'Tech Company',
-        description: 'Working on large language models and AI applications.',
+        company: 'Petanux GmbH',
+        location: 'Bonn, Germany',
+        description: 'Incorporates LLMs into chatbot systems, builds RAG pipelines with ElasticSearch & ChromaDB. Develops AI agents using LangChain/LangGraph. Refactored backend to microservices, reducing pipeline runtime from ~900s to 20-30s.',
     },
     {
-        year: '2021-2023',
+        year: 'Jul 2020 – Sep 2024',
+        title: 'Research Assistant',
+        company: 'Fraunhofer Institute for Communication, Information Processing and Ergonomics',
+        location: 'Bonn, Germany',
+        description: 'Optimized flight trajectory predictions with LSTM + NAS. Applied Transformer models for NLP. Built ETL pipelines for wildfire simulations using QGIS, PostGIS, GDAL.',
+    },
+    {
+        year: 'Jul 2016 – Mar 2019',
         title: 'Software Developer',
-        company: 'Previous Company',
-        description: 'Full-stack development with focus on backend systems.',
+        company: 'Asteria Aerospace Pvt. Ltd.',
+        location: 'Bengaluru, India',
+        description: 'Developed real-time C++ algorithms for UAV telemetry. Implemented data visualization with Qt & PyQt. Trained clients including Indian police & defense on mission software.',
     },
     {
-        year: '2019-2021',
-        title: 'Master\'s Degree',
-        company: 'University',
-        description: 'Computer Science with focus on AI and Machine Learning.',
+        year: 'Jan 2016 – Jun 2016',
+        title: 'Android Developer Intern',
+        company: 'Bison Code LLP',
+        location: 'Chandigarh, India',
+        description: 'Developed "Safe Shelter" app prototype with geofencing technology for community safety.',
+    },
+    {
+        year: 'Jun 2024',
+        title: 'MS in Computer Science',
+        company: 'Universität Paderborn',
+        location: 'Paderborn, Germany',
+        description: 'Master thesis on Knowledge Graph Embeddings with Prof. Dr. Axel-Cyrille Ngonga Ngomo. Focused on function-based embeddings and Neural Architecture Search.',
+    },
+    {
+        year: 'Jun 2016',
+        title: 'BE in Information Technology',
+        company: 'Panjab University',
+        location: 'Chandigarh, India',
+        description: 'Bachelor\'s degree in Information Technology with strong foundation in algorithms and software development.',
     },
 ]
