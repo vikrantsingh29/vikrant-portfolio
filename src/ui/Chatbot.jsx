@@ -14,6 +14,12 @@ export default function Chatbot() {
     const [isLoading, setIsLoading] = useState(false)
     const messagesEndRef = useRef(null)
 
+    // Check if API key is properly configured
+    const isApiConfigured = () => {
+        const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY
+        return apiKey && apiKey !== 'your_openrouter_api_key_here'
+    }
+
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -78,18 +84,66 @@ You should answer questions about his background, skills, projects, and experien
         setInput('')
         setIsLoading(true)
 
-        // Always uses fallback responses for GitHub Pages deployment
-        // Since environment variables are not available in static builds
-        const fallbackMessage = {
-            role: 'assistant',
-            content: generateFallbackResponse(currentInput)
-        }
-        
-        // Simulates AI thinking time for better UX
-        setTimeout(() => {
+
+        try {
+            // Checks if API key is available
+            const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY
+            if (!apiKey || apiKey === 'your_openrouter_api_key_here') {
+                // Show helpful message about API key setup
+                console.log('OpenRouter API key not configured. Using fallback responses. See README.md for setup instructions.')
+                throw new Error('API key not configured')
+            }
+
+            const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${apiKey}`,
+                    'Content-Type': 'application/json',
+                    'HTTP-Referer': window.location.origin,
+                    'X-Title': `${SITE.name} Portfolio Chatbot`
+                },
+                body: JSON.stringify({
+                    model: 'meta-llama/llama-3.1-8b-instruct:free',
+                    messages: [
+                        { role: 'system', content: systemPrompt },
+                        ...newMessages
+                    ],
+                    temperature: 0.7,
+                    max_tokens: 500
+                })
+            })
+
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}))
+                throw new Error(`API request failed: ${response.status} - ${errorData.error?.message || 'Unknown error'}`)
+            }
+
+            const data = await response.json()
+            
+            // Validates response structure
+            if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+                throw new Error('Invalid response format from API')
+            }
+
+            const assistantMessage = {
+                role: 'assistant',
+                content: data.choices[0].message.content
+            }
+
+            setMessages(prev => [...prev, assistantMessage])
+        } catch (error) {
+            console.error('Error calling OpenRouter API:', error)
+            
+            // Uses fallback response instead of generic error
+            const fallbackMessage = {
+                role: 'assistant',
+                content: generateFallbackResponse(currentInput)
+            }
             setMessages(prev => [...prev, fallbackMessage])
+        } finally {
             setIsLoading(false)
-        }, 1000 + Math.random() * 1000) // 1-2 seconds delay
+        }
     }
 
 

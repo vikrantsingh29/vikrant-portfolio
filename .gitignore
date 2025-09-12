@@ -3,5 +3,8 @@
 # Useful .gitignore templates: https://github.com/github/gitignore
 node_modules
 dist
-.cache.idea/
+.cache
+.idea/
+
+# Environment variables (contains sensitive API keys)
 .env
