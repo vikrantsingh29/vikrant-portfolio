@@ -14,6 +14,12 @@ export default function Chatbot() {
     const [isLoading, setIsLoading] = useState(false)
     const messagesEndRef = useRef(null)
 
+    // Check if API key is properly configured
+    const isApiConfigured = () => {
+        const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY
+        return apiKey && apiKey !== 'your_openrouter_api_key_here'
+    }
+
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -82,8 +88,10 @@ You should answer questions about his background, skills, projects, and experien
         try {
             // Checks if API key is available
             const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY
-            if (!apiKey) {
-                throw new Error('API key not available')
+            if (!apiKey || apiKey === 'your_openrouter_api_key_here') {
+                // Show helpful message about API key setup
+                console.log('OpenRouter API key not configured. Using fallback responses. See README.md for setup instructions.')
+                throw new Error('API key not configured')
             }
 
             const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
@@ -181,7 +189,9 @@ You should answer questions about his background, skills, projects, and experien
                             </div>
                             <div>
                                 <h3 className="font-semibold text-sm">AI Assistant</h3>
-                                <p className="text-xs opacity-90">Ask about Vikrant</p>
+                                <p className="text-xs opacity-90">
+                                    {isApiConfigured() ? 'Powered by OpenRouter' : 'Using smart responses'}
+                                </p>
                             </div>
                         </div>
                         <button
