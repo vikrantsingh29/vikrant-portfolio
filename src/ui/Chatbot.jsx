@@ -28,6 +28,7 @@ export default function Chatbot() {
 Name: ${SITE.name}
 Role: ${SITE.role}
 Email: ${SITE.email}
+Phone: ${SITE.phone}
 Location: ${SITE.location}
 About: ${SITE.subhead}
 
@@ -40,27 +41,61 @@ ${Object.entries(SKILLS).map(([category, skills]) => `${category}: ${skills.join
 You should answer questions about his background, skills, projects, and experience. Be helpful, professional, and conversational. If asked about something you don't know, be honest about the limitations of your knowledge about him. Keep responses concise but informative.`
 
 
+    // Creates fallback responses for common questions
+    const generateFallbackResponse = (userInput) => {
+        const input = userInput.toLowerCase()
+        
+        if (input.includes('project') || input.includes('work')) {
+            return `${SITE.name} has worked on several impressive projects:\n\n• **Knowledge Graph Embeddings** - His master thesis developing function-based KGE with Neural Architecture Search\n• **Step Counting with Sensor Data** - Achieved lowest error with GRU model (MSE ≈ 3.68)\n• **RAG with LangGraph** - Implemented RAG pipeline for email data querying\n• **Financial Market Strategies** - LSTM/Prophet models with Bloomberg API integration\n• **Cycling Tour Prediction** - NLP pipeline with Hugging Face NER and BART\n\nWould you like to know more about any specific project?`
+        }
+        
+        if (input.includes('skill') || input.includes('technology') || input.includes('tech')) {
+            return `${SITE.name} has expertise in:\n\n**AI/ML & LLMs:** PyTorch, TensorFlow, Hugging Face, LangChain, LangGraph, RAG, NAS\n**Programming:** Python, C++, Java, SQL\n**Backend:** Flask, FastAPI, Microservices, RabbitMQ, Redis\n**Data:** Pandas, NumPy, Power BI, Grafana, ElasticSearch\n**Cloud:** Azure, Docker, Prometheus, Loki\n\nHe's particularly strong in AI/ML and has 7+ years of experience building scalable systems.`
+        }
+        
+        if (input.includes('experience') || input.includes('job') || input.includes('work')) {
+            return `${SITE.name} has 7+ years of experience:\n\n**Current:** AI/ML Engineer at Petanux GmbH (Jan 2025 - Present)\n- Incorporates LLMs into chatbot systems\n- Builds RAG pipelines with ElasticSearch & ChromaDB\n- Reduced pipeline runtime from ~900s to 20-30s\n\n**Previous:** Research Assistant at Fraunhofer Institute (2020-2024)\n- Optimized flight trajectory predictions with LSTM + NAS\n- Built ETL pipelines for wildfire simulations\n\n**Earlier:** Software Developer at Asteria Aerospace (2016-2019)\n- Developed real-time C++ algorithms for UAV telemetry`
+        }
+        
+        if (input.includes('education') || input.includes('study') || input.includes('degree')) {
+            return `${SITE.name}'s educational background:\n\n**MS in Computer Science** - Universität Paderborn (2024)\n- Master thesis on Knowledge Graph Embeddings\n- Supervised by Prof. Dr. Axel-Cyrille Ngonga Ngomo\n\n**BE in Information Technology** - Panjab University (2016)\n- Strong foundation in algorithms and software development`
+        }
+        
+        if (input.includes('contact') || input.includes('email') || input.includes('reach')) {
+            return `You can reach ${SITE.name} at:\n\n📧 **Email:** ${SITE.email}\n📱 **Phone:** ${SITE.phone}\n📍 **Location:** ${SITE.location}\n💼 **LinkedIn:** ${SITE.socials.linkedin}\n💻 **GitHub:** ${SITE.socials.github}`
+        }
+        
+        return `I'm here to help you learn about ${SITE.name}! You can ask me about:\n\n• His **projects** and technical work\n• His **skills** and technologies\n• His **work experience** and career\n• His **education** background\n• How to **contact** him\n\nWhat would you like to know?`
+    }
+
     const sendMessage = async () => {
         if (!input.trim() || isLoading) return
 
         const userMessage = { role: 'user', content: input }
         const newMessages = [...messages, userMessage]
         setMessages(newMessages)
+        const currentInput = input
         setInput('')
         setIsLoading(true)
 
 
         try {
+            // Checks if API key is available
+            const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY
+            if (!apiKey) {
+                throw new Error('API key not available')
+            }
+
             const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${import.meta.env.VITE_OPENROUTER_API_KEY}`,
+                    'Authorization': `Bearer ${apiKey}`,
                     'Content-Type': 'application/json',
                     'HTTP-Referer': window.location.origin,
                     'X-Title': `${SITE.name} Portfolio Chatbot`
                 },
                 body: JSON.stringify({
-                    model: 'deepseek/deepseek-r1:free',
+                    model: 'meta-llama/llama-3.1-8b-instruct:free',
                     messages: [
                         { role: 'system', content: systemPrompt },
                         ...newMessages
@@ -72,11 +107,17 @@ You should answer questions about his background, skills, projects, and experien
 
 
             if (!response.ok) {
-                throw new Error(`API request failed: ${response.status}`)
+                const errorData = await response.json().catch(() => ({}))
+                throw new Error(`API request failed: ${response.status} - ${errorData.error?.message || 'Unknown error'}`)
             }
 
-
             const data = await response.json()
+            
+            // Validates response structure
+            if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+                throw new Error('Invalid response format from API')
+            }
+
             const assistantMessage = {
                 role: 'assistant',
                 content: data.choices[0].message.content
@@ -85,11 +126,13 @@ You should answer questions about his background, skills, projects, and experien
             setMessages(prev => [...prev, assistantMessage])
         } catch (error) {
             console.error('Error calling OpenRouter API:', error)
-            const errorMessage = {
+            
+            // Uses fallback response instead of generic error
+            const fallbackMessage = {
                 role: 'assistant',
-                content: 'Sorry, I encountered an error while processing your request. Please try again.'
+                content: generateFallbackResponse(currentInput)
             }
-            setMessages(prev => [...prev, errorMessage])
+            setMessages(prev => [...prev, fallbackMessage])
         } finally {
             setIsLoading(false)
         }
