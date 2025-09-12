@@ -31,17 +31,35 @@ npm run dev
 The application will be available at `http://localhost:5173/`
 
 ## Build & Deploy to GitHub Pages
-1. Create repo and push.
-2. Set `GH_PAGES_BASE` env to `/<your-repo-name>/` when building for Pages, or edit `vite.config.js` base.
-3. `npm run build`
-4. `npm run deploy` (uses gh-pages to push `dist` to `gh-pages` branch). Enable Pages to serve from that branch.
+
+### Automatic Deployment (Recommended)
+1. **Push to main branch**: The site automatically deploys when you push to the `main` branch
+2. **Configure API key**: Add `VITE_OPENROUTER_API_KEY` to GitHub repository secrets (Settings > Secrets and variables > Actions)
+3. **Access your site**: Available at `https://YOUR_USERNAME.github.io/vikrant-portfolio/`
+
+### Manual Deployment (Alternative)
+```bash
+npm run build
+npm run deploy
+```
+
+**Important**: Only the `main` branch can deploy to GitHub Pages due to environment protection rules. Feature branches will build but not deploy for security.
 
 ## Environment Variables
 
+### Local Development
 | Variable | Description | Required |
 |----------|-------------|----------|
 | `VITE_OPENROUTER_API_KEY` | Your OpenRouter API key for AI chatbot functionality | No (fallback responses used) |
 | `VITE_OPENROUTER_PROXY` | Optional Cloudflare Worker URL for API proxy | No |
+
+### Production (GitHub Pages)
+For production deployment, add these as **GitHub repository secrets** (never commit API keys to code):
+- `VITE_OPENROUTER_API_KEY`: Your OpenRouter API key
+
+**Setup instructions**: See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment and API key configuration guide.
+
+**Troubleshooting**: Having deployment issues? See [DEPLOYMENT_TROUBLESHOOTING.md](DEPLOYMENT_TROUBLESHOOTING.md) for common problems and solutions.
 
 ## Chatbot Configuration
 
