@@ -1,86 +1,48 @@
-# Setting Up the AI Chatbot with OpenRouter
+# Chatbot Setup Guide
 
-This guide explains how to configure the OpenRouter API key to enable full AI-powered conversations in your portfolio chatbot.
+## The Issue
+Your chatbot is showing "OpenRouter API key is not properly set up" because while your local `.env` file has the API key, GitHub Pages deployment doesn't have access to it.
 
-## Quick Setup
+## Solution: Add API Key to GitHub Secrets
 
-1. **Get an OpenRouter API key**:
-   - Go to [https://openrouter.ai/](https://openrouter.ai/)
-   - Sign up for a free account
-   - Navigate to "Keys" in your dashboard
-   - Generate a new API key
+### Step 1: Add Secret to GitHub Repository
+1. Go to your repository: https://github.com/vikrantsingh29/vikrant-portfolio
+2. Click on **Settings** tab
+3. In the left sidebar, click **Secrets and variables** → **Actions**
+4. Click **New repository secret**
+5. Fill in:
+   - **Name**: `VITE_OPENROUTER_API_KEY`
+   - **Secret**: ``
+6. Click **Add secret**
 
-2. **Configure your project**:
-   ```bash
-   # Copy the example environment file
-   cp .env.example .env
-   
-   # Edit .env and replace the placeholder with your actual API key
-   # Change this line:
-   VITE_OPENROUTER_API_KEY=your_openrouter_api_key_here
-   # To something like:
-   VITE_OPENROUTER_API_KEY=sk-or-v1-abcd1234...
-   ```
+### Step 2: Restart Development Server (Local Testing)
+If testing locally, restart your dev server after changing `.env`:
+```bash
+npm run dev
+```
 
-3. **Start the development server**:
-   ```bash
-   npm run dev
-   ```
-
-4. **Test the chatbot**:
-   - Click the chat button in the bottom-right corner
-   - The header should show "Powered by OpenRouter" instead of "Using smart responses"
-   - Ask any question about your background, skills, or projects
+### Step 3: Deploy to GitHub Pages
+After adding the secret, commit and push your changes:
+```bash
+git add .
+git commit -m "Fixes chatbot configuration for GitHub Pages deployment"
+git push origin main
+```
 
 ## How It Works
+- **Local Development**: Uses `.env` file
+- **GitHub Pages**: Uses repository secrets during build process
+- **Build Process**: The workflow file passes the secret as an environment variable during the build
 
-### With API Key Configured
-- Uses OpenRouter's AI models (currently meta-llama/llama-3.1-8b-instruct:free)
-- Provides dynamic, contextual responses
-- Header shows: "Powered by OpenRouter"
-
-### Without API Key (Fallback Mode)
-- Uses intelligent predefined responses
-- Still provides helpful information about projects, skills, experience, etc.
-- Header shows: "Using smart responses"
+## Verification
+1. **Local**: Open browser console, you should see "Making API request to OpenRouter..." when chatbot works
+2. **Production**: After deployment, test the chatbot on your live site
 
 ## Troubleshooting
+If chatbot still doesn't work:
+1. Check browser console for specific error messages
+2. Verify the secret was added correctly in GitHub
+3. Make sure the API key is valid on OpenRouter
+4. Wait for deployment to complete (check Actions tab)
 
-### Common Issues
-
-1. **Chatbot shows "Using smart responses" even with API key set**:
-   - Make sure you replaced `your_openrouter_api_key_here` with your actual API key
-   - Restart the development server after changing the .env file
-
-2. **API key not working**:
-   - Verify your API key is correct on [OpenRouter dashboard](https://openrouter.ai/keys)
-   - Check that your OpenRouter account has sufficient credits
-   - Look at browser console for error messages
-
-3. **Environment variable not loading**:
-   - Ensure your .env file is in the project root directory
-   - Make sure the variable starts with `VITE_` prefix
-   - Restart the development server
-
-### Security Notes
-
-- Never commit your actual API key to version control
-- The `.env` file is included in `.gitignore` to prevent accidental commits
-- Only use your API key on trusted domains
-
-## Customization
-
-You can customize the chatbot behavior by editing `src/ui/Chatbot.jsx`:
-
-- **System prompt** (lines 26-41): Defines what the AI knows about you
-- **Fallback responses** (lines 45-69): Predefined responses for common questions
-- **AI model**: Currently uses `meta-llama/llama-3.1-8b-instruct:free` (free tier)
-
-## Cost Information
-
-OpenRouter offers free tier usage with rate limits. For production use, consider:
-- Upgrading to a paid plan for higher rate limits
-- Using a more powerful model for better responses
-- Implementing your own proxy server for additional control
-
-For more information, visit [OpenRouter's documentation](https://openrouter.ai/docs).
+The chatbot should work perfectly once the GitHub secret is properly configured!

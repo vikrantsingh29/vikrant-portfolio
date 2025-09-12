@@ -33,16 +33,16 @@ export default function App() {
             <main id="top" className="max-w-6xl mx-auto px-4">
                 <Hero/>
 
-                <section id="skills" className="py-16">
+                <section id="timeline" className="py-16">
                     <div className="mb-8">
                         <h2 className="text-2xl font-bold text-terminal-cyan mb-2">
-                            # Technical Skills & Expertise
+                            # Career Timeline
                         </h2>
                         <p className="text-terminal-text-dim">
-                            // Compiled list of technologies and frameworks
+                            // Professional journey and milestones
                         </p>
                     </div>
-                    <TerminalSkills/>
+                    <TerminalTimeline/>
                 </section>
 
                 <section id="projects" className="py-16">
@@ -61,16 +61,16 @@ export default function App() {
                     </div>
                 </section>
 
-                <section id="timeline" className="py-16">
+                <section id="skills" className="py-16">
                     <div className="mb-8">
                         <h2 className="text-2xl font-bold text-terminal-cyan mb-2">
-                            # Career Timeline
+                            # Technical Skills & Expertise
                         </h2>
                         <p className="text-terminal-text-dim">
-                            // Professional journey and milestones
+                            // Compiled list of technologies and frameworks
                         </p>
                     </div>
-                    <TerminalTimeline/>
+                    <TerminalSkills/>
                 </section>
 
                 <section id="contact" className="py-16">
