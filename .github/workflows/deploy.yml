@@ -29,6 +29,11 @@ jobs:
         GH_PAGES_BASE: '/vikrant-portfolio/'
 
     - name: Setup Pages
+      uses: actions/configure-pages@v5
+      with:
+          enablement: true
+
+    - name: Setup Pages
       uses: actions/configure-pages@v5   # 🔥 updated
 
     - name: Upload artifact
