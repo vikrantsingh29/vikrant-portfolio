@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 
 export default function ThemeToggle() {
     const [dark, setDark] = useState(() => {
-        // Checks system preference first, then localStorage
+        // Defaults to dark mode, checks localStorage override
         if (typeof window !== 'undefined') {
             const stored = localStorage.getItem('theme')
             if (stored) return stored === 'dark'
-            return window.matchMedia('(prefers-color-scheme: dark)').matches
+            // Returns true for dark mode as default instead of system preference
+            return true
         }
         return true
     })

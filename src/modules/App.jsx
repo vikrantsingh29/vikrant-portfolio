@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SITE, PROJECTS } from '../config'
 import Hero from '../ui/Hero'
 import TerminalSkills from '../ui/TerminalSkills'
@@ -10,6 +10,16 @@ import ThemeToggle from '../ui/ThemeToggle'
 
 
 export default function App() {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen)
+    }
+
+    const closeMobileMenu = () => {
+        setIsMobileMenuOpen(false)
+    }
+
     return (
         <div className="min-h-screen bg-terminal-bg">
             {/* Matrix background effect */}
@@ -21,6 +31,8 @@ export default function App() {
                         <span className="terminal-prompt">root@</span>
                         <span className="font-bold text-terminal-green text-sm sm:text-base">{SITE.name.toLowerCase().replace(' ', '_')}</span>
                     </div>
+                    
+                    {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center gap-4">
                         <a href="#experience" className="nav-link">experience</a>
                         <a href="#education" className="nav-link">education</a>
@@ -29,12 +41,72 @@ export default function App() {
                         <a href="#contact" className="nav-link">contact</a>
                         <ThemeToggle/>
                     </div>
+                    
                     {/* Mobile menu toggle */}
                     <div className="md:hidden flex items-center gap-2">
                         <ThemeToggle/>
-                        <button className="terminal-button text-xs px-2 py-1">menu</button>
+                        <button 
+                            onClick={toggleMobileMenu}
+                            className="terminal-button text-xs px-2 py-1 flex items-center gap-1"
+                            aria-label="Toggle mobile menu"
+                        >
+                            <span>menu</span>
+                            <svg 
+                                className={`w-3 h-3 transition-transform ${isMobileMenuOpen ? 'rotate-180' : ''}`}
+                                fill="none" 
+                                stroke="currentColor" 
+                                viewBox="0 0 24 24"
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
                     </div>
                 </nav>
+
+                {/* Mobile Navigation Menu */}
+                {isMobileMenuOpen && (
+                    <div className="md:hidden bg-terminal-bg border-t border-terminal-border">
+                        <div className="max-w-6xl mx-auto px-4 py-4">
+                            <nav className="flex flex-col space-y-3">
+                                <a 
+                                    href="#experience" 
+                                    className="nav-link py-2 block"
+                                    onClick={closeMobileMenu}
+                                >
+                                    experience
+                                </a>
+                                <a 
+                                    href="#education" 
+                                    className="nav-link py-2 block"
+                                    onClick={closeMobileMenu}
+                                >
+                                    education
+                                </a>
+                                <a 
+                                    href="#projects" 
+                                    className="nav-link py-2 block"
+                                    onClick={closeMobileMenu}
+                                >
+                                    projects
+                                </a>
+                                <a 
+                                    href="#skills" 
+                                    className="nav-link py-2 block"
+                                    onClick={closeMobileMenu}
+                                >
+                                    skills
+                                </a>
+                                <a 
+                                    href="#contact" 
+                                    className="nav-link py-2 block"
+                                    onClick={closeMobileMenu}
+                                >
+                                    contact
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+                )}
             </header>
 
             <main id="top" className="max-w-6xl mx-auto px-4 sm:px-6">
