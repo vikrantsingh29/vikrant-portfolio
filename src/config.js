@@ -66,13 +66,25 @@ export const SKILLS = {
 }
 
 
-export const TIMELINE = [
+export const WORK_EXPERIENCE = [
     {
         year: 'Jan 2025 – Present',
         title: 'AI/ML Engineer',
         company: 'Petanux GmbH',
         location: 'Bonn, Germany',
         description: 'Incorporates LLMs into chatbot systems, builds RAG pipelines with ElasticSearch & ChromaDB. Develops AI agents using LangChain/LangGraph. Refactored backend to microservices, reducing pipeline runtime from ~900s to 20-30s.',
+        responsibilities: [
+            'Incorporated LLMs into chatbot systems, improving accuracy, reducing hallucinations, and mitigating prompt injection vulnerabilities.',
+            'Enhanced chatbot performance by optimizing retrieval workflows and reducing response latency to near real-time.',
+            'Built and optimized RAG pipelines with ElasticSearch & ChromaDB for hybrid search, streamlining ingestion and retrieval.',
+            'Developed AI agents (e.g., kiosk ordering, trading, router agents) using LangChain, LangGraph, Autogen, and function calling.',
+            'Refactored backend into microservices with Flask/FastAPI and REST APIs, using async workflows and semaphores to reduce pipeline runtime from ~900s to 20–30s.',
+            'Implemented scalable solutions: Redis-based real-time video player, RabbitMQ for orchestration, and Elastic-based hybrid DB migration.',
+            'Integrated monitoring stack with Grafana, Prometheus, Loki, Sentry to improve observability and reliability.',
+            'Designed scalable web scrapers with Playwright, Scrapy, Selenium, and httpx; automated pipelines using n8n.',
+            'Contributed to computer vision tasks (object detection & segmentation) using PyTorch and TensorFlow.'
+        ],
+        techStack: ['Python', 'LLMs', 'RAG', 'ElasticSearch', 'ChromaDB', 'LangChain', 'LangGraph', 'Flask', 'FastAPI', 'Redis', 'RabbitMQ', 'Grafana', 'Prometheus', 'PyTorch', 'TensorFlow']
     },
     {
         year: 'Jul 2020 – Sep 2024',
@@ -80,6 +92,14 @@ export const TIMELINE = [
         company: 'Fraunhofer Institute for Communication, Information Processing and Ergonomics',
         location: 'Bonn, Germany',
         description: 'Optimized flight trajectory predictions with LSTM + NAS. Applied Transformer models for NLP. Built ETL pipelines for wildfire simulations using QGIS, PostGIS, GDAL.',
+        responsibilities: [
+            'Optimized flight trajectory predictions by integrating LSTM with NAS, and implemented HMM with Viterbi Algorithm on OpenSky data.',
+            'Applied Transformer models for domain-specific NLP applications.',
+            'Built ETL pipelines for wildfire simulations using QGIS, PostGIS, GDAL; created Power BI dashboards for ML outputs.',
+            'Deployed Liferay portal in Docker, improving operational efficiency.',
+            'Collaborated across teams, simplifying technical insights for non-technical stakeholders.'
+        ],
+        techStack: ['Python', 'LSTM', 'NAS', 'Transformers', 'NLP', 'QGIS', 'PostGIS', 'GDAL', 'Power BI', 'Docker', 'Liferay']
     },
     {
         year: 'Jul 2016 – Mar 2019',
@@ -87,6 +107,13 @@ export const TIMELINE = [
         company: 'Asteria Aerospace Pvt. Ltd.',
         location: 'Bengaluru, India',
         description: 'Developed real-time C++ algorithms for UAV telemetry. Implemented data visualization with Qt & PyQt. Trained clients including Indian police & defense on mission software.',
+        responsibilities: [
+            'Developed real-time C++ algorithms for UAV telemetry, improving flight performance and safety.',
+            'Implemented data visualization with Qt & PyQt, enhancing mission control usability.',
+            'Integrated geospatial datasets to strengthen UAV mission planning and control.',
+            'Trained clients including Indian police & defense on mission software, and mentored new hires.'
+        ],
+        techStack: ['C++', 'Qt', 'PyQt', 'UAV Systems', 'Geospatial Data', 'Real-time Systems']
     },
     {
         year: 'Jan 2016 – Jun 2016',
@@ -94,19 +121,32 @@ export const TIMELINE = [
         company: 'Bison Code LLP',
         location: 'Chandigarh, India',
         description: 'Developed "Safe Shelter" app prototype with geofencing technology for community safety.',
+        responsibilities: [
+            'Developed "Safe Shelter" app prototype with geofencing technology for community safety.'
+        ],
+        techStack: ['Android', 'Java', 'Geofencing', 'Mobile Development']
     },
+]
+
+
+export const EDUCATION = [
     {
         year: 'Jun 2024',
         title: 'MS in Computer Science',
-        company: 'Universität Paderborn',
+        institution: 'Universität Paderborn',
         location: 'Paderborn, Germany',
         description: 'Master thesis on Knowledge Graph Embeddings with Prof. Dr. Axel-Cyrille Ngonga Ngomo. Focused on function-based embeddings and Neural Architecture Search.',
+        gpa: '1.7 (German Scale)',
     },
     {
         year: 'Jun 2016',
         title: 'BE in Information Technology',
-        company: 'Panjab University',
+        institution: 'Panjab University',
         location: 'Chandigarh, India',
         description: 'Bachelor\'s degree in Information Technology with strong foundation in algorithms and software development.',
+        gpa: 'First Class',
     },
 ]
+
+// Keep the old TIMELINE for backward compatibility but mark as deprecated
+export const TIMELINE = WORK_EXPERIENCE

@@ -3,7 +3,8 @@ import { SITE, PROJECTS } from '../config'
 import Hero from '../ui/Hero'
 import TerminalSkills from '../ui/TerminalSkills'
 import ProjectCard from '../ui/ProjectCard'
-import TerminalTimeline from '../ui/TerminalTimeline'
+import WorkExperience from '../ui/WorkExperience'
+import Education from '../ui/Education'
 import Chatbot from '../ui/Chatbot'
 import ThemeToggle from '../ui/ThemeToggle'
 
@@ -18,120 +19,96 @@ export default function App() {
                 <nav className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <span className="terminal-prompt">root@</span>
-                        <span className="font-bold text-terminal-green">{SITE.name.toLowerCase().replace(' ', '_')}</span>
+                        <span className="font-bold text-terminal-green text-sm sm:text-base">{SITE.name.toLowerCase().replace(' ', '_')}</span>
                     </div>
-                    <div className="flex items-center gap-4">
-                        <a href="#projects" className="nav-link">./projects</a>
-                        <a href="#skills" className="nav-link">./skills</a>
-                        <a href="#timeline" className="nav-link">git log</a>
-                        <a href="#contact" className="nav-link">contact.sh</a>
+                    <div className="hidden md:flex items-center gap-4">
+                        <a href="#experience" className="nav-link">experience</a>
+                        <a href="#education" className="nav-link">education</a>
+                        <a href="#projects" className="nav-link">projects</a>
+                        <a href="#skills" className="nav-link">skills</a>
+                        <a href="#contact" className="nav-link">contact</a>
                         <ThemeToggle/>
+                    </div>
+                    {/* Mobile menu toggle */}
+                    <div className="md:hidden flex items-center gap-2">
+                        <ThemeToggle/>
+                        <button className="terminal-button text-xs px-2 py-1">menu</button>
                     </div>
                 </nav>
             </header>
 
-            <main id="top" className="max-w-6xl mx-auto px-4">
+            <main id="top" className="max-w-6xl mx-auto px-4 sm:px-6">
                 <Hero/>
 
-                <section id="timeline" className="py-16">
-                    <div className="mb-8">
-                        <h2 className="text-2xl font-bold text-terminal-cyan mb-2">
-                            # Career Timeline
+                <section id="experience" className="py-12 sm:py-20">
+                    <div className="mb-8 sm:mb-12">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-terminal-cyan mb-3">
+                            Work Experience
                         </h2>
-                        <p className="text-terminal-text-dim">
-                            // Professional journey and milestones
+                        <p className="text-terminal-text-dim text-sm sm:text-base">
+                            Professional journey and achievements
                         </p>
                     </div>
-                    <TerminalTimeline/>
+                    <WorkExperience/>
                 </section>
 
-                <section id="projects" className="py-16">
-                    <div className="mb-8">
-                        <h2 className="text-2xl font-bold text-terminal-cyan mb-2">
-                            # Projects & Portfolio
+                <section id="education" className="py-12 sm:py-20">
+                    <div className="mb-8 sm:mb-12">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-terminal-cyan mb-3">
+                            Education
                         </h2>
-                        <p className="text-terminal-text-dim">
-                            // Recent work and contributions
+                        <p className="text-terminal-text-dim text-sm sm:text-base">
+                            Academic background and qualifications
                         </p>
                     </div>
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <Education/>
+                </section>
+
+                <section id="projects" className="py-12 sm:py-20">
+                    <div className="mb-8 sm:mb-12">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-terminal-cyan mb-3">
+                            Featured Projects
+                        </h2>
+                        <p className="text-terminal-text-dim text-sm sm:text-base">
+                            Recent work and contributions
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {PROJECTS.map(p => (
                             <ProjectCard key={p.slug} project={p}/>
                         ))}
                     </div>
                 </section>
 
-                <section id="skills" className="py-16">
-                    <div className="mb-8">
-                        <h2 className="text-2xl font-bold text-terminal-cyan mb-2">
-                            # Technical Skills & Expertise
+                <section id="skills" className="py-12 sm:py-20">
+                    <div className="mb-8 sm:mb-12">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-terminal-cyan mb-3">
+                            Technical Skills
                         </h2>
-                        <p className="text-terminal-text-dim">
-                            // Compiled list of technologies and frameworks
+                        <p className="text-terminal-text-dim text-sm sm:text-base">
+                            Technologies and frameworks
                         </p>
                     </div>
                     <TerminalSkills/>
                 </section>
 
-                <section id="contact" className="py-16">
-                    <div className="mb-8">
-                        <h2 className="text-2xl font-bold text-terminal-cyan mb-2">
-                            # Contact & Communication
+                <section id="contact" className="py-12 sm:py-20">
+                    <div className="mb-8 sm:mb-12">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-terminal-cyan mb-3">
+                            Get In Touch
                         </h2>
-                        <p className="text-terminal-text-dim">
-                            // Reach out for collaboration opportunities
+                        <p className="text-terminal-text-dim text-sm sm:text-base">
+                            Let's connect and collaborate
                         </p>
                     </div>
-                    <div className="grid md:grid-cols-2 gap-6">
-                        <div className="terminal-form">
-                            <div className="mb-4">
-                                <span className="terminal-prompt">$</span>
-                                <span className="text-terminal-command ml-2">send_message --to vikrant</span>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="terminal-window">
+                            <div className="terminal-header">
+                                <span>contact_info</span>
                             </div>
-                            <form action="https://formspree.io/f/your-id" method="POST">
-                                <div className="mb-4">
-                                    <label className="block text-terminal-green text-sm mb-2">--name</label>
-                                    <input
-                                        name="name"
-                                        required
-                                        className="terminal-input"
-                                        placeholder="Enter your name..."
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-terminal-green text-sm mb-2">--email</label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        required
-                                        className="terminal-input"
-                                        placeholder="your@email.com"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-terminal-green text-sm mb-2">--message</label>
-                                    <textarea
-                                        name="message"
-                                        rows="5"
-                                        required
-                                        className="terminal-textarea"
-                                        placeholder="Type your message here..."
-                                    ></textarea>
-                                </div>
-                                <button className="terminal-button">
-                                    ./submit.sh
-                                </button>
-                            </form>
-                        </div>
-
-                        <div className="terminal-form">
-                            <div className="mb-4">
-                                <span className="terminal-prompt">$</span>
-                                <span className="text-terminal-command ml-2">cat contact_info.txt</span>
-                            </div>
-                            <div className="terminal-output space-y-3">
-                                <div className="flex items-center gap-2">
-                                    <span className="text-terminal-green">email:</span>
+                            <div className="p-6 space-y-4">
+                                <div className="flex items-center gap-3">
+                                    <span className="text-terminal-green">📧</span>
                                     <a
                                         className="text-terminal-cyan hover:text-terminal-amber transition-colors"
                                         href={`mailto:${SITE.email}`}
@@ -139,25 +116,65 @@ export default function App() {
                                         {SITE.email}
                                     </a>
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <span className="text-terminal-green">linkedin:</span>
+                                <div className="flex items-center gap-3">
+                                    <span className="text-terminal-green">📱</span>
+                                    <span className="text-terminal-text">{SITE.phone}</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <span className="text-terminal-green">💼</span>
                                     <a
                                         className="text-terminal-cyan hover:text-terminal-amber transition-colors"
                                         href={SITE.socials.linkedin}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        /in/vikrantsingh29
+                                        LinkedIn Profile
                                     </a>
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <span className="text-terminal-green">location:</span>
+                                <div className="flex items-center gap-3">
+                                    <span className="text-terminal-green">💻</span>
+                                    <a
+                                        className="text-terminal-cyan hover:text-terminal-amber transition-colors"
+                                        href={SITE.socials.github}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        GitHub Profile
+                                    </a>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <span className="text-terminal-green">📍</span>
                                     <span className="text-terminal-text">{SITE.location}</span>
                                 </div>
-                                <div className="mt-4 pt-3 border-t border-terminal-border">
-                                    <span className="text-terminal-text-dim text-xs">
-                                        # Always open to interesting conversations and collaborations
-                                    </span>
+                            </div>
+                        </div>
+
+                        <div className="terminal-window">
+                            <div className="terminal-header">
+                                <span>quick_message</span>
+                            </div>
+                            <div className="p-6">
+                                <div className="space-y-4">
+                                    <p className="text-terminal-text text-sm leading-relaxed">
+                                        Always open to interesting conversations about AI/ML, software development, 
+                                        and collaboration opportunities.
+                                    </p>
+                                    <div className="flex flex-col sm:flex-row gap-3">
+                                        <a 
+                                            href={`mailto:${SITE.email}`}
+                                            className="terminal-button text-center text-sm"
+                                        >
+                                            Send Email
+                                        </a>
+                                        <a 
+                                            href={SITE.socials.linkedin}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="terminal-button-outline text-center text-sm"
+                                        >
+                                            Connect on LinkedIn
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
