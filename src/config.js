@@ -137,14 +137,105 @@ export const EDUCATION = [
         location: 'Paderborn, Germany',
         description: 'Master thesis on Knowledge Graph Embeddings with Prof. Dr. Axel-Cyrille Ngonga Ngomo. Focused on function-based embeddings and Neural Architecture Search.',
         gpa: '1.7 (German Scale)',
+        modules: {
+            'Focus Areas / Core Modules': [
+                'Software Engineering',
+                'Data-Driven Innovation and Engineering',
+                'Model-Based Systems Engineering',
+                'Software Quality Assurance',
+                'Computer Systems',
+                'Intelligence in Embedded Systems',
+                'Intelligence and Data',
+                'Computational Argumentation',
+                'Planning and Heuristic Search',
+                'Data Science',
+                'Interactive Data Visualization',
+                'Machine Learning I'
+            ],
+            'Seminars': [
+                'Seminar I (Topic: Advanced Algorithms)'
+            ],
+            'Project': [
+                'Project Group: Data Science Suite'
+            ],
+            'Thesis': [
+                'Master-Abschlussarbeit (Master\'s Thesis)',
+                'Title: Knowledge graph embeddings in function spaces using Neural Architecture Search'
+            ],
+            'Additional Courses (Studium Generale)': [
+                'Deutschkurs A1.2',
+                'Deutschkurs A2.1'
+            ]
+        }
     },
     {
-        year: 'Jun 2016',
-        title: 'BE in Information Technology',
+        year: 'May 2016',
+        title: 'Bachelor of Engineering (Information Technology)',
         institution: 'Panjab University',
         location: 'Chandigarh, India',
-        description: 'Bachelor\'s degree in Information Technology with strong foundation in algorithms and software development.',
+        description: 'Bachelor\'s degree in Information Technology with comprehensive curriculum covering programming, systems, networks, and emerging technologies.',
         gpa: 'First Class',
+        modules: {
+            '1st Semester (Dec 2012)': [
+                'Engineering Mathematics-I',
+                'Physics',
+                'Environmental Education',
+                'Basic Electronics',
+                'Basic Electrical Engineering',
+                'Engineering Graphics'
+            ],
+            '2nd Semester (May 2013)': [
+                'Engineering Mathematics-II',
+                'Economics',
+                'Chemistry',
+                'Programming Fundamentals',
+                'Fundamentals of Mechanical Engineering',
+                'Workshop Practice',
+                'Workshop Training for 4 weeks'
+            ],
+            '3rd Semester (Dec 2013)': [
+                'Engineering Mathematics-III',
+                'Analog and Digital Communication',
+                'System Analysis and Design',
+                'Object Oriented Programming',
+                'Digital Electronics'
+            ],
+            '4th Semester (Dec 2014)': [
+                'Cyber Law & IPR',
+                'Data Structure & Algorithms',
+                'Computer Networks',
+                'Microprocessor',
+                'Computer Architecture & Organization'
+            ],
+            '5th Semester (Dec 2014)': [
+                'Database Management Systems',
+                'Computer Graphics',
+                'Operating System',
+                'System Software',
+                'Multimedia Systems',
+                'Industrial Training (After 4th Semester)'
+            ],
+            '6th Semester (May 2015)': [
+                'Wireless Communication',
+                'Software Engineering',
+                'Internet & Web Technology',
+                'Network Security & Cryptography',
+                'Business Intelligence'
+            ],
+            '7th Semester (Dec 2015)': [
+                'Digital Signal Processing',
+                'Java Technologies',
+                'Compiler Design',
+                'Cloud Computing',
+                'Mobile Computing',
+                'Project-I',
+                'Industrial Training (After 6th Semester)'
+            ],
+            '8th Semester (May 2016)': [
+                'Industrial Training',
+                'Project-II (Final Year Project)'
+            ]
+        }
     },
 ]
 
