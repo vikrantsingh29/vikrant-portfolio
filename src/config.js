@@ -136,24 +136,20 @@ export const EDUCATION = [
         institution: 'Universität Paderborn',
         location: 'Paderborn, Germany',
         description: 'Master thesis on Knowledge Graph Embeddings with Prof. Dr. Axel-Cyrille Ngonga Ngomo. Focused on function-based embeddings and Neural Architecture Search.',
-        gpa: '1.7 (German Scale)',
         modules: {
-            'Focus Areas / Core Modules': [
-                'Software Engineering',
+            'Core Modules': [
                 'Data-Driven Innovation and Engineering',
                 'Model-Based Systems Engineering',
                 'Software Quality Assurance',
-                'Computer Systems',
                 'Intelligence in Embedded Systems',
-                'Intelligence and Data',
                 'Computational Argumentation',
                 'Planning and Heuristic Search',
-                'Data Science',
                 'Interactive Data Visualization',
                 'Machine Learning I'
             ],
             'Seminars': [
-                'Seminar I (Topic: Advanced Algorithms)'
+                'Seminar I: Advanced Algorithm - Empirical Evaluation of Cuckoo Filter',
+                'Seminar II: Visual Analysis of Temporal Data Using Parallel Coordinates'
             ],
             'Project': [
                 'Project Group: Data Science Suite'
@@ -174,7 +170,6 @@ export const EDUCATION = [
         institution: 'Panjab University',
         location: 'Chandigarh, India',
         description: 'Bachelor\'s degree in Information Technology with comprehensive curriculum covering programming, systems, networks, and emerging technologies.',
-        gpa: 'First Class',
         modules: {
             '1st Semester (Dec 2012)': [
                 'Engineering Mathematics-I',

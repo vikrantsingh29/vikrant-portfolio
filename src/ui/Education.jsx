@@ -60,18 +60,10 @@ export default function Education() {
                                     </div>
                                 </div>
 
-                                {/* Location and GPA */}
-                                <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                                    <div className="flex items-center gap-2 text-sm">
-                                        <span className="text-green-600 dark:text-green-400">📍</span>
-                                        <span className="text-gray-600 dark:text-gray-300">{item.location}</span>
-                                    </div>
-                                    {item.gpa && (
-                                        <div className="flex items-center gap-2 text-sm">
-                                            <span className="text-purple-600 dark:text-purple-400">🎓</span>
-                                            <span className="text-gray-600 dark:text-gray-300">{item.gpa}</span>
-                                        </div>
-                                    )}
+                                {/* Location */}
+                                <div className="flex items-center gap-2 text-sm">
+                                    <span className="text-green-600 dark:text-green-400">📍</span>
+                                    <span className="text-gray-600 dark:text-gray-300">{item.location}</span>
                                 </div>
                             </div>
                         </div>
