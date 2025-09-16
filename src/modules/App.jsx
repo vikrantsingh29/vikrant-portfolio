@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { SITE, PROJECTS } from '../config'
 import Hero from '../ui/Hero'
 import TerminalSkills from '../ui/TerminalSkills'
@@ -6,11 +6,23 @@ import ProjectCard from '../ui/ProjectCard'
 import WorkExperience from '../ui/WorkExperience'
 import Education from '../ui/Education'
 import Chatbot from '../ui/Chatbot'
-import ThemeToggle from '../ui/ThemeToggle'
+import VisitorCounter from '../ui/VisitorCounter'
+import { trackContactClick } from '../utils/analytics'
 
 
 export default function App() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+    // Forces dark theme on portfolio load
+    useEffect(() => {
+        document.documentElement.classList.add('dark')
+        localStorage.setItem('theme', 'dark')
+    }, [])
+
+    // Handles contact link tracking
+    const handleContactClick = (type, value) => {
+        trackContactClick(type, value);
+    };
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -39,13 +51,11 @@ export default function App() {
                         <a href="#projects" className="nav-link">projects</a>
                         <a href="#skills" className="nav-link">skills</a>
                         <a href="#contact" className="nav-link">contact</a>
-                        <ThemeToggle/>
                     </div>
                     
                     {/* Mobile menu toggle */}
                     <div className="md:hidden flex items-center gap-2">
-                        <ThemeToggle/>
-                        <button 
+                        <button
                             onClick={toggleMobileMenu}
                             className="terminal-button text-xs px-2 py-1 flex items-center gap-1"
                             aria-label="Toggle mobile menu"
@@ -184,6 +194,7 @@ export default function App() {
                                     <a
                                         className="text-terminal-cyan hover:text-terminal-amber transition-colors"
                                         href={`mailto:${SITE.email}`}
+                                        onClick={() => handleContactClick('email', SITE.email)}
                                     >
                                         {SITE.email}
                                     </a>
@@ -199,6 +210,7 @@ export default function App() {
                                         href={SITE.socials.linkedin}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        onClick={() => handleContactClick('linkedin', SITE.socials.linkedin)}
                                     >
                                         LinkedIn Profile
                                     </a>
@@ -210,6 +222,7 @@ export default function App() {
                                         href={SITE.socials.github}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        onClick={() => handleContactClick('github', SITE.socials.github)}
                                     >
                                         GitHub Profile
                                     </a>
@@ -235,6 +248,7 @@ export default function App() {
                                         <a 
                                             href={`mailto:${SITE.email}`}
                                             className="terminal-button text-center text-sm"
+                                            onClick={() => handleContactClick('email_button', SITE.email)}
                                         >
                                             Send Email
                                         </a>
@@ -243,6 +257,7 @@ export default function App() {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="terminal-button-outline text-center text-sm"
+                                            onClick={() => handleContactClick('linkedin_button', SITE.socials.linkedin)}
                                         >
                                             Connect on LinkedIn
                                         </a>
@@ -256,6 +271,9 @@ export default function App() {
 
             {/* Floating Chatbot Widget */}
             <Chatbot/>
+
+            {/* Visitor Counter */}
+            <VisitorCounter/>
         </div>
     )
 }

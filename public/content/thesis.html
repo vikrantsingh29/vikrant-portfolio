@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Function‑Based KG Embeddings — Thesis One‑Pager</title>
+  <meta name="description" content="A clean, professional overview of knowledge graph embeddings as functions with neural architecture search."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div style="max-width: 800px; margin: 0 auto; padding: 40px 20px 80px; font-family: 'Merriweather', Georgia, serif; line-height: 1.7; color: #111;">
+
+    <!-- Back Navigation -->
+    <div style="margin-bottom: 32px;">
+      <a href="/" style="color: #0f766e; text-decoration: none; font-family: 'Inter', sans-serif; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: #f0fdf4; border-radius: 6px; border: 1px solid #bbf7d0; transition: all 0.2s;">
+        <span>←</span> Back to Portfolio
+      </a>
+    </div>
+
+    <!-- Header Section -->
+    <header style="margin-bottom: 40px; text-align: center; border-bottom: 2px solid #e5e7eb; padding-bottom: 32px;">
+      <h1 style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: 42px; line-height: 1.1; margin: 0 0 16px; color: #111; background: linear-gradient(135deg, #0f766e, #059669); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+        Embeddings as <em style="color: #0f766e;">Functions</em> for Knowledge Graphs
+      </h1>
+      <p style="font-size: 18px; color: #6b7280; margin: 0 0 16px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Replacing fixed vectors with <strong>function-based</strong> representations using <strong>Neural Architecture Search</strong> for improved link prediction
+      </p>
+      <div style="color: #9ca3af; font-size: 14px; font-family: 'Inter', sans-serif;">
+        by <strong style="color: #374151;">Vikrant Singh</strong> • Master's Thesis • University of Paderborn
+      </div>
+    </header>
+
+    <!-- TL;DR Section -->
+    <section style="background: linear-gradient(135deg, #f0fdf4, #ecfdf5); border: 1px solid #bbf7d0; border-radius: 12px; padding: 24px; margin-bottom: 40px; border-left: 4px solid #0f766e;">
+      <h3 style="font-family: 'Inter', sans-serif; font-weight: 700; margin: 0 0 12px; color: #0f766e; font-size: 16px;">
+        🎯 TL;DR
+      </h3>
+      <p style="margin: 0; font-size: 16px; line-height: 1.6;">
+        This work models KG embeddings as <strong>functions f(θ, x)</strong> instead of fixed vectors, scores triples by <strong>composing</strong> these functions, and uses <strong>Neural Network-based function spaces</strong> optimized via Neural Architecture Search. Achieves exceptional performance on smaller KGs (MRR of <strong>0.83 on UMLS</strong>), with scalability challenges on larger datasets.
+      </p>
+    </section>
+
+    <!-- Problem & Solution -->
+    <section style="margin-bottom: 40px;">
+      <h2 style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 28px; margin: 0 0 20px; color: #111; border-bottom: 2px solid #0f766e; padding-bottom: 8px;">
+        💡 The Problem & Our Solution
+      </h2>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+        <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 20px;">
+          <h4 style="font-family: 'Inter', sans-serif; font-weight: 600; margin: 0 0 12px; color: #dc2626;">❌ Traditional Approach</h4>
+          <p style="margin: 0; color: #7f1d1d; font-size: 14px;">Fixed vector embeddings (TransE, DistMult, ComplEx) are rigid and struggle with nuanced relation patterns in Knowledge Graphs.</p>
+        </div>
+        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 20px;">
+          <h4 style="font-family: 'Inter', sans-serif; font-weight: 600; margin: 0 0 12px; color: #059669;">✅ Our Innovation</h4>
+          <p style="margin: 0; color: #064e3b; font-size: 14px;">Function-based embeddings with more degrees of freedom, optimized through Neural Architecture Search for better expressivity.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Methodology -->
+    <section style="margin-bottom: 40px;">
+      <h2 style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 28px; margin: 0 0 20px; color: #111; border-bottom: 2px solid #0f766e; padding-bottom: 8px;">
+        🔬 Methodology
+      </h2>
+
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; margin-bottom: 20px;">
+        <h3 style="font-family: 'Inter', sans-serif; font-weight: 600; margin: 0 0 16px; color: #1e293b;">Core Approach</h3>
+        <ul style="margin: 0; padding-left: 20px; color: #334155;">
+          <li style="margin-bottom: 8px;"><strong>Function Representations:</strong> Entities/relations as functions <code style="background: #e2e8f0; padding: 2px 6px; border-radius: 4px; font-family: monospace;">f(θ, x)</code> over polynomial, complex, or neural function spaces</li>
+          <li style="margin-bottom: 8px;"><strong>Compositional Scoring:</strong> Triple scoring through function composition (best performing method)</li>
+          <li style="margin-bottom: 8px;"><strong>Loss Functions:</strong> BCE with logits (most robust), L2 norm, margin ranking</li>
+          <li style="margin-bottom: 0;"><strong>Neural Architecture Search:</strong> Microsoft NNI for discovering optimal NN architectures</li>
+        </ul>
+      </div>
+
+      <!-- Method Diagram -->
+      <div style="background: #fafafa; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; text-align: center;">
+        <h4 style="font-family: 'Inter', sans-serif; font-weight: 600; margin: 0 0 16px; color: #374151;">Pipeline Overview</h4>
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+          <div style="background: #dbeafe; border: 1px solid #93c5fd; border-radius: 6px; padding: 12px 16px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500;">
+            Triples (h,r,t)
+          </div>
+          <span style="color: #0f766e; font-weight: bold;">→</span>
+          <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 12px 16px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500;">
+            Function Embeddings
+          </div>
+          <span style="color: #0f766e; font-weight: bold;">→</span>
+          <div style="background: #fef3c7; border: 1px solid #fcd34d; border-radius: 6px; padding: 12px 16px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500;">
+            Compositional Score
+          </div>
+          <span style="color: #0f766e; font-weight: bold;">→</span>
+          <div style="background: #fde68a; border: 1px solid #f59e0b; border-radius: 6px; padding: 12px 16px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500;">
+            Loss & Update
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Results -->
+    <section style="margin-bottom: 40px;">
+      <h2 style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 28px; margin: 0 0 20px; color: #111; border-bottom: 2px solid #0f766e; padding-bottom: 8px;">
+        📊 Key Results
+      </h2>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
+        <div style="background: linear-gradient(135deg, #0f766e, #059669); color: white; border-radius: 10px; padding: 24px; text-align: center;">
+          <div style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 36px; margin-bottom: 8px;">0.83</div>
+          <div style="font-size: 14px; opacity: 0.9;">MRR on UMLS Dataset</div>
+          <div style="font-size: 12px; opacity: 0.7; margin-top: 4px;">Neural Network Function Space</div>
+        </div>
+        <div style="background: linear-gradient(135deg, #7c3aed, #6366f1); color: white; border-radius: 10px; padding: 24px; text-align: center;">
+          <div style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 36px; margin-bottom: 8px;">0.745</div>
+          <div style="font-size: 14px; opacity: 0.9;">MRR on Kinship</div>
+          <div style="font-size: 12px; opacity: 0.7; margin-top: 4px;">2048 parameters</div>
+        </div>
+      </div>
+
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px;">
+        <h4 style="font-family: 'Inter', sans-serif; font-weight: 600; margin: 0 0 12px; color: #1e293b;">🏆 Key Findings</h4>
+        <ul style="margin: 0; padding-left: 20px; color: #334155;">
+          <li style="margin-bottom: 6px;"><strong>Compositional scoring</strong> outperforms trilinear and vector triple product methods</li>
+          <li style="margin-bottom: 6px;"><strong>BCE with logits</strong> shows best generalization across datasets</li>
+          <li style="margin-bottom: 6px;"><strong>Complex-number function spaces</strong> excel on smaller Knowledge Graphs</li>
+          <li style="margin-bottom: 0;">Traditional models (DistMult/ComplEx) remain competitive on very large KGs</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Datasets -->
+    <section style="margin-bottom: 40px;">
+      <h2 style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 28px; margin: 0 0 20px; color: #111; border-bottom: 2px solid #0f766e; padding-bottom: 8px;">
+        📁 Evaluated Datasets
+      </h2>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div>
+          <table style="width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; font-size: 14px; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <thead>
+              <tr style="background: #f8fafc;">
+                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #e2e8f0; font-weight: 600; color: #374151;">Dataset</th>
+                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #e2e8f0; font-weight: 600; color: #374151;">Scale</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9;">UMLS</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9;"><span style="background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 12px; font-size: 12px;">Small</span></td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9;">Kinship</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9;"><span style="background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 12px; font-size: 12px;">Small</span></td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9;">WN18</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9;"><span style="background: #fef3c7; color: #92400e; padding: 2px 8px; border-radius: 12px; font-size: 12px;">Large</span></td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9;">FB15k</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9;"><span style="background: #fef3c7; color: #92400e; padding: 2px 8px; border-radius: 12px; font-size: 12px;">Large</span></td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px;">NELL-995</td>
+                <td style="padding: 10px 12px;"><span style="background: #fed7aa; color: #c2410c; padding: 2px 8px; border-radius: 12px; font-size: 12px;">Medium-Large</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px;">
+            <h4 style="font-family: 'Inter', sans-serif; font-weight: 600; margin: 0 0 12px; color: #1e293b;">🔧 Technical Setup</h4>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+              <span style="background: #e0e7ff; color: #3730a3; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-family: 'Inter', sans-serif;">Negative Sampling</span>
+              <span style="background: #fecaca; color: #991b1b; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-family: 'Inter', sans-serif;">BCE Loss</span>
+              <span style="background: #bfdbfe; color: #1d4ed8; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-family: 'Inter', sans-serif;">MRR & Hits@K</span>
+              <span style="background: #c7d2fe; color: #4338ca; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-family: 'Inter', sans-serif;">Microsoft NNI</span>
+            </div>
+            <p style="margin: 0; color: #64748b; font-size: 13px;">
+              Neural Architecture Search explored layer counts, residual connections, activations, learning rates, and regularization. <strong>2-layer residual ReLU networks</strong> emerged as optimal.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impact & Limitations -->
+    <section style="margin-bottom: 40px;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <div>
+          <h3 style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 20px; margin: 0 0 16px; color: #059669;">🎯 Why It Matters</h3>
+          <div style="background: linear-gradient(135deg, #f0fdf4, #ecfdf5); border-left: 4px solid #059669; padding: 16px; border-radius: 8px;">
+            <p style="margin: 0; color: #064e3b; font-size: 15px;">
+              Function-based embeddings add <strong>expressivity</strong> without hard-coding relation patterns. They capture phases/magnitudes (complex space) and non-linearities (neural space), especially effective for real-world, small to mid-scale KGs.
+            </p>
+          </div>
+        </div>
+        <div>
+          <h3 style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 20px; margin: 0 0 16px; color: #dc2626;">⚠️ Limitations</h3>
+          <div style="background: linear-gradient(135deg, #fef2f2, #fef1f1); border-left: 4px solid #dc2626; padding: 16px; border-radius: 8px;">
+            <ul style="margin: 0; padding-left: 16px; color: #7f1d1d; font-size: 15px;">
+              <li style="margin-bottom: 8px;"><strong>Scalability:</strong> Performance gains diminish on very large KGs</li>
+              <li style="margin-bottom: 0;"><strong>Computational cost:</strong> Increases with function complexity</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Future Work -->
+    <section style="margin-bottom: 40px;">
+      <h2 style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 28px; margin: 0 0 20px; color: #111; border-bottom: 2px solid #0f766e; padding-bottom: 8px;">
+        🚀 Future Directions
+      </h2>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px; text-align: center;">
+          <div style="font-size: 24px; margin-bottom: 8px;">🔍</div>
+          <h4 style="font-family: 'Inter', sans-serif; font-weight: 600; margin: 0 0 8px; color: #1e40af;">Advanced NAS</h4>
+          <p style="margin: 0; color: #1e3a8a; font-size: 13px;">Push Neural Architecture Search for scalable architectures</p>
+        </div>
+        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 16px; text-align: center;">
+          <div style="font-size: 24px; margin-bottom: 8px;">⚡</div>
+          <h4 style="font-family: 'Inter', sans-serif; font-weight: 600; margin: 0 0 8px; color: #059669;">New Scoring</h4>
+          <p style="margin: 0; color: #064e3b; font-size: 13px;">Design scoring functions tailored for function spaces</p>
+        </div>
+        <div style="background: #fef7ff; border: 1px solid #e9d5ff; border-radius: 8px; padding: 16px; text-align: center;">
+          <div style="font-size: 24px; margin-bottom: 8px;">🌐</div>
+          <h4 style="font-family: 'Inter', sans-serif; font-weight: 600; margin: 0 0 8px; color: #7c3aed;">Inductive KGE</h4>
+          <p style="margin: 0; color: #6b21a8; font-size: 13px;">Generalize to unseen entities beyond transductive settings</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="border-top: 1px solid #e5e7eb; padding-top: 24px; text-align: center;">
+      <p style="color: #9ca3af; font-size: 14px; margin: 0; font-family: 'Inter', sans-serif;">
+        This research demonstrates the potential of function-based Knowledge Graph embeddings,
+        opening new avenues for more expressive and flexible graph representation learning.
+      </p>
+      <div style="margin-top: 16px;">
+        <a href="/" style="color: #0f766e; text-decoration: none; font-family: 'Inter', sans-serif; font-size: 14px; padding: 8px 16px; background: #f0fdf4; border-radius: 6px; border: 1px solid #bbf7d0;">
+          ← Return to Portfolio
+        </a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

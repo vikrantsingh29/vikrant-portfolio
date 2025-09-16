@@ -1,10 +1,20 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import { trackProjectClick } from '../utils/analytics'
 
 
 export default function ProjectCard({project}) {
+    // Handles project click tracking
+    const handleProjectClick = () => {
+        trackProjectClick(project.slug, project.title);
+    };
+
     return (
-        <Link to={`${import.meta.env.BASE_URL}article/${project.slug}`} className="group block">
+        <Link
+            to={`${import.meta.env.BASE_URL}article/${project.slug}`}
+            className="group block"
+            onClick={handleProjectClick}
+        >
             <div className="project-card">
                 {/* Terminal-style header */}
                 <div className="flex items-center gap-2 mb-3 pb-2 border-b border-terminal-border">
