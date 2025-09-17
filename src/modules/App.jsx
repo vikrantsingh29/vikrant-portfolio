@@ -8,6 +8,7 @@ import Education from '../ui/Education'
 import Chatbot from '../ui/Chatbot'
 import VisitorCounter from '../ui/VisitorCounter'
 import { trackContactClick } from '../utils/analytics'
+import { FaLinkedin } from 'react-icons/fa'
 
 
 export default function App() {
@@ -206,13 +207,14 @@ export default function App() {
                                 <div className="flex items-center gap-3">
                                     <span className="text-terminal-green">💼</span>
                                     <a
-                                        className="text-terminal-cyan hover:text-terminal-amber transition-colors"
+                                        className="text-terminal-cyan hover:text-terminal-amber transition-colors flex items-center gap-2"
                                         href={SITE.socials.linkedin}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         onClick={() => handleContactClick('linkedin', SITE.socials.linkedin)}
                                     >
-                                        LinkedIn Profile
+                                        <FaLinkedin className="w-4 h-4" />
+                                        LinkedIn
                                     </a>
                                 </div>
                                 <div className="flex items-center gap-3">
@@ -256,10 +258,11 @@ export default function App() {
                                             href={SITE.socials.linkedin}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="terminal-button-outline text-center text-sm"
+                                            className="terminal-button-outline text-center text-sm flex items-center justify-center gap-2"
                                             onClick={() => handleContactClick('linkedin_button', SITE.socials.linkedin)}
                                         >
-                                            Connect on LinkedIn
+                                            <FaLinkedin className="w-4 h-4" />
+                                            LinkedIn
                                         </a>
                                     </div>
                                 </div>
