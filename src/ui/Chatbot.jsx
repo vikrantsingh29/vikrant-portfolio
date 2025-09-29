@@ -7,7 +7,7 @@ export default function Chatbot() {
     const [messages, setMessages] = useState([
         {
             role: 'assistant',
-            content: `Hi! I'm an AI assistant that knows about ${SITE.name}. Ask me anything about his background, skills, projects, or experience!`
+            content: `Hey there! 👋 I'm an AI assistant who knows all about ${SITE.name} - the funny tech guy with a passion for building cool stuff! Ask me anything about his background, projects, hobbies, or basically anything you're curious about. I promise to keep it entertaining! 😄`
         }
     ])
     const [input, setInput] = useState('')
@@ -24,12 +24,25 @@ export default function Chatbot() {
 
     const systemPrompt = `You are an AI assistant for ${SITE.name}'s portfolio website. Here's what you know about him:
 
+BASIC INFO:
 Name: ${SITE.name}
 Role: ${SITE.role}
 Email: ${SITE.email}
 Phone: ${SITE.phone}
 Location: ${SITE.location}
 About: ${SITE.subhead}
+Date of Birth: January 29, 1995
+
+PERSONAL DETAILS:
+- Single and available for work in Germany or remotely, also open to Netherlands for exceptional opportunities
+- Speaks fluent English and Hindi, and a little German
+- Personality: A funny tech guy who's absolutely crazy about technology
+
+HOBBIES & INTERESTS:
+- Sports: Loves playing football and watching football/sports in general, plays badminton really well
+- Music: Favorite DJs are Daft Punk and Lost Frequencies, currently into Fred again
+- Creative: Plays guitar and sketches sometimes
+- Tech enthusiast: Passionate about all things technology
 
 PROJECTS:
 ${PROJECTS.map(p => `- ${p.title}: ${p.description} (Tech: ${p.stack.join(', ')})`).join('\n')}
@@ -37,7 +50,8 @@ ${PROJECTS.map(p => `- ${p.title}: ${p.description} (Tech: ${p.stack.join(', ')}
 SKILLS:
 ${Object.entries(SKILLS).map(([category, skills]) => `${category}: ${skills.join(', ')}`).join('\n')}
 
-You should answer questions about his background, skills, projects, and experience. Be helpful, professional, and conversational. If asked about something you don't know, be honest about the limitations of your knowledge about him. Keep responses concise but informative.`
+PERSONALITY & TONE:
+You should reply in a funny and engaging manner while being helpful and informative. Vikrant is a funny tech guy, so feel free to use tech humor, light jokes, and a conversational tone. Be enthusiastic about technology topics and show his personality through your responses. Keep responses concise but entertaining. If asked about something you don't know, be honest about the limitations but do it in a witty way.`
 
 
     const sendMessage = async () => {
