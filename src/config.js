@@ -24,8 +24,8 @@ export const PROJECTS = [
     {
         slug: 'step-counting-sensor-data',
         title: 'Step Counting with Sensor Data',
-        description: 'Processed raw IMU data with Butterworth filtering and peak detection. Achieved lowest error with GRU model (MSE ≈ 3.68) for accurate left-right step counting.',
-        stack: ['Python', 'PyTorch', 'LSTM', 'GRU', 'Random Forest', 'XGBoost'],
+        description: 'Advanced step counting system using raw IMU sensor data with custom Butterworth low-pass filtering and peak detection algorithms. Developed semi-supervised approach with separate left/right foot analysis. Achieved superior accuracy with GRU model (MSE ≈ 3.68) outperforming LSTM, CNN-LSTM, Random Forest, and XGBoost models through comprehensive evaluation of sequential and aggregated-feature approaches.',
+        stack: ['Python', 'PyTorch', 'LSTM', 'GRU', 'Random Forest', 'XGBoost', 'Signal Processing', 'Peak Detection'],
         image: '/assets/steps.jpg',
     },
     {
