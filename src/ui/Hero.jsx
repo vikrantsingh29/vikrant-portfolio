@@ -65,9 +65,16 @@ export default function Hero() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
                 <div className="space-y-4 sm:space-y-6">
                     <div>
-                        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-terminal-text mb-2 sm:mb-4">
-                            {SITE.name}
-                        </h1>
+                        <div className="flex items-center gap-4 sm:gap-6 mb-2 sm:mb-4">
+                            <img 
+                                src="/assets/Display_Picture.jpg" 
+                                alt="Vikrant Singh" 
+                                className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full object-cover border-2 border-terminal-green shadow-lg"
+                            />
+                            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-terminal-text">
+                                {SITE.name}
+                            </h1>
+                        </div>
                         <div className="text-lg sm:text-xl text-terminal-cyan mb-2 sm:mb-4">
                             {SITE.role}
                         </div>
