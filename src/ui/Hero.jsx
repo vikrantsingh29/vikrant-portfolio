@@ -67,7 +67,7 @@ export default function Hero() {
                     <div>
                         <div className="flex items-center gap-4 sm:gap-6 mb-2 sm:mb-4">
                             <img 
-                                src="/assets/Display_Picture.jpg" 
+                                src={`${import.meta.env.BASE_URL}assets/Display_Picture.jpg`}
                                 alt="Vikrant Singh" 
                                 className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full object-cover border-2 border-terminal-green shadow-lg"
                             />
