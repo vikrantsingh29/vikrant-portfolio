@@ -15,6 +15,19 @@
     --terminal-text-dim: #888888;
 }
 
+/* Light theme variables */
+:root:not(.dark) {
+    --terminal-bg: #f8f9fa;
+    --terminal-surface: #ffffff;
+    --terminal-border: #dee2e6;
+    --terminal-green: #198754;
+    --terminal-amber: #fd7e14;
+    --terminal-cyan: #0dcaf0;
+    --terminal-red: #dc3545;
+    --terminal-text: #212529;
+    --terminal-text-dim: #6c757d;
+}
+
 * {
     box-sizing: border-box;
 }
