@@ -7,18 +7,13 @@ import WorkExperience from '../ui/WorkExperience'
 import Education from '../ui/Education'
 import Chatbot from '../ui/Chatbot'
 import VisitorCounter from '../ui/VisitorCounter'
+import ThemeToggle from '../ui/ThemeToggle'
 import { trackContactClick } from '../utils/analytics'
 import { FaLinkedin } from 'react-icons/fa'
 
 
 export default function App() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
-    // Forces dark theme on portfolio load
-    useEffect(() => {
-        document.documentElement.classList.add('dark')
-        localStorage.setItem('theme', 'dark')
-    }, [])
 
     // Handles contact link tracking
     const handleContactClick = (type, value) => {
@@ -52,10 +47,12 @@ export default function App() {
                         <a href="#projects" className="nav-link">projects</a>
                         <a href="#skills" className="nav-link">skills</a>
                         <a href="#contact" className="nav-link">contact</a>
+                        <ThemeToggle />
                     </div>
                     
                     {/* Mobile menu toggle */}
                     <div className="md:hidden flex items-center gap-2">
+                        <ThemeToggle />
                         <button
                             onClick={toggleMobileMenu}
                             className="terminal-button text-xs px-2 py-1 flex items-center gap-1"
