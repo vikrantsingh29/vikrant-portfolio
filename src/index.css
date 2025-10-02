@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Terminal-style global styling */
+/* Terminal-style global styling - DARK THEME (unchanged) */
 :root {
     --terminal-bg: #0a0a0a;
     --terminal-surface: #1a1a1a;
@@ -15,17 +15,27 @@
     --terminal-text-dim: #888888;
 }
 
-/* Light theme variables */
+/* Light theme variables - VIBRANT NEW DESIGN */
 :root:not(.dark) {
-    --terminal-bg: #f8f9fa;
+    /* Beautiful gradient background */
+    --terminal-bg: linear-gradient(135deg, #fef3f2 0%, #f0f9ff 100%);
     --terminal-surface: #ffffff;
-    --terminal-border: #dee2e6;
-    --terminal-green: #198754;
-    --terminal-amber: #fd7e14;
-    --terminal-cyan: #0dcaf0;
-    --terminal-red: #dc3545;
-    --terminal-text: #212529;
-    --terminal-text-dim: #6c757d;
+    --terminal-border: #e0e7ff;
+    
+    /* Vibrant accent colors */
+    --terminal-green: #14b8a6; /* Teal */
+    --terminal-amber: #f59e0b; /* Warm amber */
+    --terminal-cyan: #06b6d4; /* Bright cyan */
+    --terminal-red: #ff6b6b; /* Coral red */
+    --terminal-purple: #a855f7; /* Purple accent */
+    
+    /* Text colors */
+    --terminal-text: #1e293b;
+    --terminal-text-dim: #64748b;
+    
+    /* Additional theme colors */
+    --terminal-accent-bg: #fef3f2;
+    --terminal-hover: #f1f5f9;
 }
 
 * {
@@ -47,6 +57,12 @@ body {
     line-height: 1.6;
 }
 
+/* Light theme specific body background */
+body:not(.dark) {
+    background: linear-gradient(135deg, #fef3f2 0%, #f0f9ff 100%);
+    min-height: 100vh;
+}
+
 /* Terminal window styling */
 .terminal-window {
     background: var(--terminal-surface);
@@ -54,6 +70,11 @@ body {
     border-radius: 8px;
     position: relative;
     overflow: hidden;
+}
+
+/* Light theme terminal window enhancement */
+:root:not(.dark) .terminal-window {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .terminal-window::before {
@@ -67,6 +88,12 @@ body {
     border-bottom: 1px solid var(--terminal-border);
 }
 
+/* Light theme terminal header */
+:root:not(.dark) .terminal-window::before {
+    background: linear-gradient(135deg, #fef3f2, #e0e7ff);
+    border-bottom: 1px solid #e0e7ff;
+}
+
 .terminal-window::after {
     content: '● ● ●';
     position: absolute;
@@ -75,6 +102,11 @@ body {
     color: #ff5f56;
     font-size: 12px;
     z-index: 10;
+}
+
+/* Light theme dots */
+:root:not(.dark) .terminal-window::after {
+    color: #ff6b6b;
 }
 
 .terminal-content {
@@ -134,6 +166,20 @@ body {
     );
 }
 
+/* Light theme background pattern */
+:root:not(.dark) .matrix-bg {
+    opacity: 0.02;
+    background-image: repeating-linear-gradient(
+        45deg,
+        #14b8a6 0px,
+        transparent 1px,
+        transparent 30px,
+        #a855f7 31px,
+        transparent 32px,
+        transparent 60px
+    );
+}
+
 /* Skill category styling */
 .skill-category {
     background: var(--terminal-surface);
@@ -142,6 +188,18 @@ body {
     margin-bottom: 16px;
     padding: 16px;
     border-radius: 4px;
+}
+
+/* Light theme skill category */
+:root:not(.dark) .skill-category {
+    border-left: 3px solid #14b8a6;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+:root:not(.dark) .skill-category:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
 }
 
 .skill-category h3 {
@@ -164,12 +222,25 @@ body {
     font-family: inherit;
 }
 
+/* Light theme skill tags - vibrant colors */
+:root:not(.dark) .skill-tag {
+    background: linear-gradient(135deg, #d1fae5, #dbeafe);
+    color: #0f766e;
+    border: 1px solid #14b8a6;
+    font-weight: 500;
+}
+
 /* Timeline terminal styling */
 .timeline-item {
     position: relative;
     padding-left: 30px;
     margin-bottom: 20px;
     border-left: 2px solid var(--terminal-border);
+}
+
+/* Light theme timeline */
+:root:not(.dark) .timeline-item {
+    border-left: 2px solid #c7d2fe;
 }
 
 .timeline-item::before {
@@ -183,16 +254,36 @@ body {
     font-size: 14px;
 }
 
+/* Light theme timeline marker */
+:root:not(.dark) .timeline-item::before {
+    background: linear-gradient(135deg, #fef3f2, #f0f9ff);
+    color: #14b8a6;
+}
+
 .timeline-year {
     color: var(--terminal-amber);
     font-weight: bold;
     font-size: 14px;
 }
 
+/* Light theme timeline year */
+:root:not(.dark) .timeline-year {
+    color: #f59e0b;
+    background: linear-gradient(135deg, #fef3f2, #fef9c3);
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
 .timeline-title {
     color: var(--terminal-cyan);
     font-weight: bold;
     margin: 4px 0;
+}
+
+/* Light theme timeline title */
+:root:not(.dark) .timeline-title {
+    color: #0891b2;
 }
 
 .timeline-company {
@@ -214,10 +305,32 @@ body {
     box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
 }
 
+/* Light theme project cards */
+:root:not(.dark) .project-card {
+    background: linear-gradient(135deg, #ffffff, #fefefe);
+    border: 1px solid #e0e7ff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+:root:not(.dark) .project-card:hover {
+    border-color: #14b8a6;
+    box-shadow: 0 10px 15px -3px rgba(20, 184, 166, 0.2), 0 4px 6px -2px rgba(168, 85, 247, 0.1);
+    transform: translateY(-4px);
+}
+
 .project-title {
     color: var(--terminal-cyan);
     font-weight: bold;
     margin-bottom: 8px;
+}
+
+/* Light theme project title */
+:root:not(.dark) .project-title {
+    background: linear-gradient(135deg, #14b8a6, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .project-description {
@@ -242,6 +355,14 @@ body {
     font-size: 11px;
 }
 
+/* Light theme stack tags */
+:root:not(.dark) .stack-tag {
+    background: linear-gradient(135deg, #fef3c7, #fed7aa);
+    color: #c2410c;
+    border: 1px solid #fb923c;
+    font-weight: 500;
+}
+
 /* Button styling */
 .terminal-button {
     background: transparent;
@@ -260,11 +381,32 @@ body {
     color: var(--terminal-bg);
 }
 
+/* Light theme buttons */
+:root:not(.dark) .terminal-button {
+    border: 2px solid #14b8a6;
+    color: #14b8a6;
+    font-weight: 600;
+}
+
+:root:not(.dark) .terminal-button:hover {
+    background: linear-gradient(135deg, #14b8a6, #06b6d4);
+    color: #ffffff;
+    box-shadow: 0 4px 6px -1px rgba(20, 184, 166, 0.3);
+    transform: translateY(-2px);
+}
+
 /* Navigation styling */
 .terminal-nav {
     background: var(--terminal-surface);
     border-bottom: 1px solid var(--terminal-border);
     backdrop-filter: blur(10px);
+}
+
+/* Light theme navigation */
+:root:not(.dark) .terminal-nav {
+    background: rgba(255, 255, 255, 0.8);
+    border-bottom: 1px solid #e0e7ff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
 .nav-link {
@@ -280,12 +422,30 @@ body {
     background: rgba(0, 255, 65, 0.1);
 }
 
+/* Light theme nav links */
+:root:not(.dark) .nav-link {
+    color: #64748b;
+    font-weight: 500;
+}
+
+:root:not(.dark) .nav-link:hover {
+    color: #14b8a6;
+    background: linear-gradient(135deg, #d1fae5, #dbeafe);
+}
+
 /* Form styling */
 .terminal-form {
     background: var(--terminal-surface);
     border: 1px solid var(--terminal-border);
     border-radius: 4px;
     padding: 20px;
+}
+
+/* Light theme forms */
+:root:not(.dark) .terminal-form {
+    background: #ffffff;
+    border: 1px solid #e0e7ff;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .terminal-input {
@@ -306,6 +466,18 @@ body {
     box-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
 }
 
+/* Light theme inputs */
+:root:not(.dark) .terminal-input {
+    background: #ffffff;
+    border: 2px solid #e0e7ff;
+    color: #1e293b;
+}
+
+:root:not(.dark) .terminal-input:focus {
+    border-color: #14b8a6;
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+}
+
 .terminal-textarea {
     background: var(--terminal-bg);
     border: 1px solid var(--terminal-border);
@@ -324,4 +496,16 @@ body {
     outline: none;
     border-color: var(--terminal-green);
     box-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
+}
+
+/* Light theme textarea */
+:root:not(.dark) .terminal-textarea {
+    background: #ffffff;
+    border: 2px solid #e0e7ff;
+    color: #1e293b;
+}
+
+:root:not(.dark) .terminal-textarea:focus {
+    border-color: #14b8a6;
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
 }
