@@ -15,27 +15,27 @@
     --terminal-text-dim: #888888;
 }
 
-/* Light theme variables - VIBRANT NEW DESIGN */
+/* Netflix-style theme variables */
 :root:not(.dark) {
-    /* Beautiful gradient background */
-    --terminal-bg: linear-gradient(135deg, #fef3f2 0%, #f0f9ff 100%);
-    --terminal-surface: #ffffff;
-    --terminal-border: #e0e7ff;
+    /* Netflix dark background */
+    --terminal-bg: #141414;
+    --terminal-surface: #1f1f1f;
+    --terminal-border: #2f2f2f;
     
-    /* Vibrant accent colors */
-    --terminal-green: #14b8a6; /* Teal */
-    --terminal-amber: #f59e0b; /* Warm amber */
-    --terminal-cyan: #06b6d4; /* Bright cyan */
-    --terminal-red: #ff6b6b; /* Coral red */
+    /* Netflix accent colors */
+    --terminal-green: #46d369; /* Netflix green */
+    --terminal-amber: #f5a623; /* Gold accent */
+    --terminal-cyan: #54b9c5; /* Teal accent */
+    --terminal-red: #E50914; /* Netflix red */
     --terminal-purple: #a855f7; /* Purple accent */
     
     /* Text colors */
-    --terminal-text: #1e293b;
-    --terminal-text-dim: #64748b;
+    --terminal-text: #ffffff;
+    --terminal-text-dim: #b3b3b3;
     
     /* Additional theme colors */
-    --terminal-accent-bg: #fef3f2;
-    --terminal-hover: #f1f5f9;
+    --terminal-accent-bg: #2f2f2f;
+    --terminal-hover: #2a2a2a;
 }
 
 * {
@@ -88,10 +88,10 @@ body:not(.dark) {
     border-bottom: 1px solid var(--terminal-border);
 }
 
-/* Light theme terminal header */
+/* Netflix theme terminal header */
 :root:not(.dark) .terminal-window::before {
-    background: linear-gradient(135deg, #fef3f2, #e0e7ff);
-    border-bottom: 1px solid #e0e7ff;
+    background: #1f1f1f;
+    border-bottom: 1px solid #2f2f2f;
 }
 
 .terminal-window::after {
@@ -104,9 +104,9 @@ body:not(.dark) {
     z-index: 10;
 }
 
-/* Light theme dots */
+/* Netflix theme dots */
 :root:not(.dark) .terminal-window::after {
-    color: #ff6b6b;
+    color: #E50914;
 }
 
 .terminal-content {
@@ -166,17 +166,15 @@ body:not(.dark) {
     );
 }
 
-/* Light theme background pattern */
+/* Netflix theme background pattern */
 :root:not(.dark) .matrix-bg {
-    opacity: 0.02;
+    opacity: 0.05;
     background-image: repeating-linear-gradient(
-        45deg,
-        #14b8a6 0px,
+        0deg,
+        #E50914 0px,
         transparent 1px,
-        transparent 30px,
-        #a855f7 31px,
-        transparent 32px,
-        transparent 60px
+        transparent 20px,
+        #E50914 21px
     );
 }
 
@@ -190,15 +188,15 @@ body:not(.dark) {
     border-radius: 4px;
 }
 
-/* Light theme skill category */
+/* Netflix theme skill category */
 :root:not(.dark) .skill-category {
-    border-left: 3px solid #14b8a6;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    border-left: 3px solid #E50914;
+    box-shadow: 0 2px 8px 0 rgba(229, 9, 20, 0.15);
     transition: all 0.3s ease;
 }
 
 :root:not(.dark) .skill-category:hover {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px -1px rgba(229, 9, 20, 0.25);
     transform: translateY(-2px);
 }
 
@@ -222,11 +220,11 @@ body:not(.dark) {
     font-family: inherit;
 }
 
-/* Light theme skill tags - vibrant colors */
+/* Netflix theme skill tags */
 :root:not(.dark) .skill-tag {
-    background: linear-gradient(135deg, #d1fae5, #dbeafe);
-    color: #0f766e;
-    border: 1px solid #14b8a6;
+    background: rgba(229, 9, 20, 0.15);
+    color: #ffffff;
+    border: 1px solid #E50914;
     font-weight: 500;
 }
 
@@ -238,9 +236,9 @@ body:not(.dark) {
     border-left: 2px solid var(--terminal-border);
 }
 
-/* Light theme timeline */
+/* Netflix theme timeline */
 :root:not(.dark) .timeline-item {
-    border-left: 2px solid #c7d2fe;
+    border-left: 3px solid #E50914;
 }
 
 .timeline-item::before {
@@ -254,10 +252,10 @@ body:not(.dark) {
     font-size: 14px;
 }
 
-/* Light theme timeline marker */
+/* Netflix theme timeline marker */
 :root:not(.dark) .timeline-item::before {
-    background: linear-gradient(135deg, #fef3f2, #f0f9ff);
-    color: #14b8a6;
+    background: #141414;
+    color: #E50914;
 }
 
 .timeline-year {
@@ -266,10 +264,10 @@ body:not(.dark) {
     font-size: 14px;
 }
 
-/* Light theme timeline year */
+/* Netflix theme timeline year */
 :root:not(.dark) .timeline-year {
-    color: #f59e0b;
-    background: linear-gradient(135deg, #fef3f2, #fef9c3);
+    color: #ffffff;
+    background: #E50914;
     padding: 2px 8px;
     border-radius: 4px;
     display: inline-block;
@@ -281,9 +279,9 @@ body:not(.dark) {
     margin: 4px 0;
 }
 
-/* Light theme timeline title */
+/* Netflix theme timeline title */
 :root:not(.dark) .timeline-title {
-    color: #0891b2;
+    color: #ffffff;
 }
 
 .timeline-company {
@@ -305,17 +303,17 @@ body:not(.dark) {
     box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
 }
 
-/* Light theme project cards */
+/* Netflix theme project cards */
 :root:not(.dark) .project-card {
-    background: linear-gradient(135deg, #ffffff, #fefefe);
-    border: 1px solid #e0e7ff;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    background: #1f1f1f;
+    border: 1px solid #2f2f2f;
+    box-shadow: 0 2px 8px 0 rgba(229, 9, 20, 0.15);
     transition: all 0.3s ease;
 }
 
 :root:not(.dark) .project-card:hover {
-    border-color: #14b8a6;
-    box-shadow: 0 10px 15px -3px rgba(20, 184, 166, 0.2), 0 4px 6px -2px rgba(168, 85, 247, 0.1);
+    border-color: #E50914;
+    box-shadow: 0 10px 20px -3px rgba(229, 9, 20, 0.3);
     transform: translateY(-4px);
 }
 
@@ -325,12 +323,12 @@ body:not(.dark) {
     margin-bottom: 8px;
 }
 
-/* Light theme project title */
+/* Netflix theme project title */
 :root:not(.dark) .project-title {
-    background: linear-gradient(135deg, #14b8a6, #a855f7);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #E50914;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
+    background-clip: unset;
 }
 
 .project-description {
@@ -355,11 +353,11 @@ body:not(.dark) {
     font-size: 11px;
 }
 
-/* Light theme stack tags */
+/* Netflix theme stack tags */
 :root:not(.dark) .stack-tag {
-    background: linear-gradient(135deg, #fef3c7, #fed7aa);
-    color: #c2410c;
-    border: 1px solid #fb923c;
+    background: rgba(229, 9, 20, 0.2);
+    color: #ffffff;
+    border: 1px solid #E50914;
     font-weight: 500;
 }
 
@@ -381,17 +379,17 @@ body:not(.dark) {
     color: var(--terminal-bg);
 }
 
-/* Light theme buttons */
+/* Netflix theme buttons */
 :root:not(.dark) .terminal-button {
-    border: 2px solid #14b8a6;
-    color: #14b8a6;
+    border: 2px solid #E50914;
+    color: #E50914;
     font-weight: 600;
 }
 
 :root:not(.dark) .terminal-button:hover {
-    background: linear-gradient(135deg, #14b8a6, #06b6d4);
+    background: #E50914;
     color: #ffffff;
-    box-shadow: 0 4px 6px -1px rgba(20, 184, 166, 0.3);
+    box-shadow: 0 4px 6px -1px rgba(229, 9, 20, 0.4);
     transform: translateY(-2px);
 }
 
@@ -402,11 +400,11 @@ body:not(.dark) {
     backdrop-filter: blur(10px);
 }
 
-/* Light theme navigation */
+/* Netflix theme navigation */
 :root:not(.dark) .terminal-nav {
-    background: rgba(255, 255, 255, 0.8);
-    border-bottom: 1px solid #e0e7ff;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    background: rgba(20, 20, 20, 0.95);
+    border-bottom: 1px solid #2f2f2f;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.5);
 }
 
 .nav-link {
@@ -421,6 +419,152 @@ body:not(.dark) {
     color: var(--terminal-green);
     background: rgba(0, 255, 65, 0.1);
 }
+
+/* Netflix theme - Work Experience Timeline Styling */
+:root:not(.dark) .timeline-vertical-line {
+    background-color: #E50914;
+    width: 2px;
+}
+
+:root:not(.dark) .timeline-dot {
+    background-color: #E50914;
+    border-color: #141414;
+}
+
+:root:not(.dark) .experience-card {
+    background-color: #1f1f1f;
+    border-color: #2f2f2f;
+}
+
+:root:not(.dark) .experience-header {
+    border-color: #2f2f2f;
+}
+
+:root:not(.dark) .experience-header:hover {
+    background-color: #2a2a2a;
+}
+
+:root:not(.dark) .experience-title {
+    color: #ffffff;
+}
+
+:root:not(.dark) .experience-company {
+    color: #E50914;
+}
+
+:root:not(.dark) .experience-year {
+    background-color: #E50914;
+    color: #ffffff;
+}
+
+:root:not(.dark) .experience-location-icon {
+    color: #E50914;
+}
+
+:root:not(.dark) .experience-location {
+    color: #b3b3b3;
+}
+
+:root:not(.dark) .experience-description {
+    color: #b3b3b3;
+}
+
+:root:not(.dark) .experience-details {
+    border-color: #2f2f2f;
+}
+
+:root:not(.dark) .experience-section-title {
+    color: #E50914;
+}
+
+:root:not(.dark) .experience-bullet {
+    color: #E50914;
+}
+
+:root:not(.dark) .experience-text {
+    color: #b3b3b3;
+}
+
+:root:not(.dark) .experience-tech-tag {
+    background-color: rgba(229, 9, 20, 0.2);
+    color: #ffffff;
+    border-color: #E50914;
+}
+
+:root:not(.dark) .experience-expand-btn {
+    color: #E50914;
+}
+
+:root:not(.dark) .experience-expand-btn:hover {
+    color: #ff0a16;
+}
+
+/* Netflix theme - Education Timeline Styling */
+:root:not(.dark) .education-card {
+    background-color: #1f1f1f;
+    border-color: #2f2f2f;
+}
+
+:root:not(.dark) .education-header {
+    border-color: #2f2f2f;
+}
+
+:root:not(.dark) .education-title {
+    color: #ffffff;
+}
+
+:root:not(.dark) .education-institution {
+    color: #E50914;
+}
+
+:root:not(.dark) .education-year {
+    background-color: #E50914;
+    color: #ffffff;
+}
+
+:root:not(.dark) .education-location-icon {
+    color: #E50914;
+}
+
+:root:not(.dark) .education-location {
+    color: #b3b3b3;
+}
+
+:root:not(.dark) .education-description {
+    color: #b3b3b3;
+}
+
+:root:not(.dark) .education-expand-btn {
+    color: #E50914;
+}
+
+:root:not(.dark) .education-expand-btn:hover {
+    color: #ff0a16;
+}
+
+:root:not(.dark) .education-modules {
+    background-color: #2a2a2a;
+}
+
+:root:not(.dark) .education-module-category {
+    color: #ffffff;
+    border-color: #2f2f2f;
+}
+
+:root:not(.dark) .education-module-item {
+    background-color: #1f1f1f;
+    border-color: #2f2f2f;
+}
+
+:root:not(.dark) .education-module-bullet {
+    color: #E50914;
+}
+
+:root:not(.dark) .education-module-text {
+    color: #b3b3b3;
+}
+
+
 
 /* Light theme nav links */
 :root:not(.dark) .nav-link {
