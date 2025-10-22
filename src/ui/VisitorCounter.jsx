@@ -44,8 +44,10 @@ export default function VisitorCounter() {
                     let sessionId = sessionStorage.getItem(sessionKey)
                     
                     if (!sessionId) {
-                        // New session - generate unique ID and increment counter
-                        sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+                        // New session - generate unique ID using cryptographically secure random
+                        const array = new Uint32Array(2)
+                        crypto.getRandomValues(array)
+                        sessionId = `session_${Date.now()}_${array[0].toString(36)}${array[1].toString(36)}`
                         sessionStorage.setItem(sessionKey, sessionId)
                         
                         // Increment the visitor count in localStorage
