@@ -5,9 +5,9 @@ compatibility_date = "2024-01-01"
 # KV Namespace binding for visitor count storage
 [[kv_namespaces]]
 binding = "VISITOR_COUNT"
-id = "YOUR_KV_NAMESPACE_ID_HERE"
+id = "92bfffaa01bc48a8a884f568bd461c72"
 
-# Routes - update with your actual domain
+# Routes - optional (you can enable later if you use a custom domain)
 # routes = [
 #   { pattern = "yourdomain.com/api/*", zone_name = "yourdomain.com" }
 # ]
