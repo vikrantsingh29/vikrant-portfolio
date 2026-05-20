@@ -2,654 +2,350 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Terminal-style global styling - DARK THEME (unchanged) */
 :root {
-    --terminal-bg: #0a0a0a;
-    --terminal-surface: #1a1a1a;
-    --terminal-border: #333333;
-    --terminal-green: #00ff41;
-    --terminal-amber: #ffb000;
-    --terminal-cyan: #00ffff;
-    --terminal-red: #ff4444;
-    --terminal-text: #e0e0e0;
-    --terminal-text-dim: #888888;
+    --bg-primary: #030712;
+    --bg-secondary: #0a0e1a;
+    --bg-card: rgba(15, 21, 38, 0.8);
+    --border-subtle: rgba(139, 92, 246, 0.15);
+    --border-glow: rgba(139, 92, 246, 0.4);
+    --accent-violet: #8b5cf6;
+    --accent-cyan: #06b6d4;
+    --accent-blue: #3b82f6;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #475569;
 }
 
-/* Netflix-style theme variables */
-:root:not(.dark) {
-    /* Netflix dark background */
-    --terminal-bg: #141414;
-    --terminal-surface: #1f1f1f;
-    --terminal-border: #2f2f2f;
-    
-    /* Netflix accent colors */
-    --terminal-green: #46d369; /* Netflix green */
-    --terminal-amber: #f5a623; /* Gold accent */
-    --terminal-cyan: #54b9c5; /* Teal accent */
-    --terminal-red: #E50914; /* Netflix red */
-    --terminal-purple: #a855f7; /* Purple accent */
-    
-    /* Text colors */
-    --terminal-text: #ffffff;
-    --terminal-text-dim: #b3b3b3;
-    
-    /* Additional theme colors */
-    --terminal-accent-bg: #2f2f2f;
-    --terminal-hover: #2a2a2a;
-}
-
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html {
     scroll-behavior: smooth;
-    background: var(--terminal-bg);
-    color: var(--terminal-text);
-    font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    background: var(--bg-primary);
 }
 
 body {
     margin: 0;
     padding: 0;
-    background: var(--terminal-bg);
-    color: var(--terminal-text);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, sans-serif;
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
-/* Light theme specific body background */
-body:not(.dark) {
-    background: linear-gradient(135deg, #fef3f2 0%, #f0f9ff 100%);
-    min-height: 100vh;
-}
-
-/* Terminal window styling */
-.terminal-window {
-    background: var(--terminal-surface);
-    border: 1px solid var(--terminal-border);
-    border-radius: 8px;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Light theme terminal window enhancement */
-:root:not(.dark) .terminal-window {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-.terminal-window::before {
+/* ─── Noise/grain overlay ───────────────────────────────── */
+body::before {
     content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 30px;
-    background: var(--terminal-border);
-    border-bottom: 1px solid var(--terminal-border);
-}
-
-/* Netflix theme terminal header */
-:root:not(.dark) .terminal-window::before {
-    background: #1f1f1f;
-    border-bottom: 1px solid #2f2f2f;
-}
-
-.terminal-window::after {
-    content: '● ● ●';
-    position: absolute;
-    top: 8px;
-    left: 12px;
-    color: #ff5f56;
-    font-size: 12px;
-    z-index: 10;
-}
-
-/* Netflix theme dots */
-:root:not(.dark) .terminal-window::after {
-    color: #E50914;
-}
-
-.terminal-content {
-    padding: 40px 20px 20px;
-    background: var(--terminal-surface);
-}
-
-/* Terminal prompt styling */
-.terminal-prompt {
-    color: var(--terminal-green);
-    font-weight: bold;
-}
-
-.terminal-command {
-    color: var(--terminal-cyan);
-}
-
-.terminal-output {
-    color: var(--terminal-text);
-    margin-left: 20px;
-}
-
-/* Typing animation */
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-@keyframes blink {
-    0%, 50% { border-right-color: transparent; }
-    51%, 100% { border-right-color: var(--terminal-green); }
-}
-
-.typing-effect {
-    overflow: hidden;
-    border-right: 2px solid var(--terminal-green);
-    white-space: nowrap;
-    margin: 0 auto;
-    animation: typing 3s steps(40, end), blink 1s infinite;
-}
-
-/* Matrix-style background effect */
-.matrix-bg {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    opacity: 0.03;
-    background-image: repeating-linear-gradient(
-        0deg,
-        var(--terminal-green) 0px,
-        transparent 1px,
-        transparent 20px,
-        var(--terminal-green) 21px
-    );
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
 }
 
-/* Netflix theme background pattern */
-:root:not(.dark) .matrix-bg {
-    opacity: 0.05;
-    background-image: repeating-linear-gradient(
-        0deg,
-        #E50914 0px,
-        transparent 1px,
-        transparent 20px,
-        #E50914 21px
-    );
+/* ─── Gradient Orbs ─────────────────────────────────────── */
+.orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+}
+.orb-violet {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 70%);
+    top: -100px;
+    right: -100px;
+}
+.orb-cyan {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(6,182,212,0.1) 0%, transparent 70%);
+    bottom: 10%;
+    left: -100px;
 }
 
-/* Skill category styling */
-.skill-category {
-    background: var(--terminal-surface);
-    border: 1px solid var(--terminal-border);
-    border-left: 3px solid var(--terminal-green);
-    margin-bottom: 16px;
-    padding: 16px;
-    border-radius: 4px;
-}
-
-/* Netflix theme skill category */
-:root:not(.dark) .skill-category {
-    border-left: 3px solid #E50914;
-    box-shadow: 0 2px 8px 0 rgba(229, 9, 20, 0.15);
-    transition: all 0.3s ease;
-}
-
-:root:not(.dark) .skill-category:hover {
-    box-shadow: 0 4px 12px -1px rgba(229, 9, 20, 0.25);
-    transform: translateY(-2px);
-}
-
-.skill-category h3 {
-    color: var(--terminal-green);
-    margin: 0 0 12px 0;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.skill-tag {
-    display: inline-block;
-    background: rgba(0, 255, 65, 0.1);
-    color: var(--terminal-green);
-    padding: 4px 8px;
-    margin: 2px 4px 2px 0;
-    border: 1px solid rgba(0, 255, 65, 0.3);
-    border-radius: 3px;
-    font-size: 12px;
-    font-family: inherit;
-}
-
-/* Netflix theme skill tags */
-:root:not(.dark) .skill-tag {
-    background: rgba(229, 9, 20, 0.15);
-    color: #ffffff;
-    border: 1px solid #E50914;
-    font-weight: 500;
-}
-
-/* Timeline terminal styling */
-.timeline-item {
-    position: relative;
-    padding-left: 30px;
-    margin-bottom: 20px;
-    border-left: 2px solid var(--terminal-border);
-}
-
-/* Netflix theme timeline */
-:root:not(.dark) .timeline-item {
-    border-left: 3px solid #E50914;
-}
-
-.timeline-item::before {
-    content: '>';
-    position: absolute;
-    left: -8px;
-    top: 0;
-    background: var(--terminal-bg);
-    color: var(--terminal-green);
-    font-weight: bold;
-    font-size: 14px;
-}
-
-/* Netflix theme timeline marker */
-:root:not(.dark) .timeline-item::before {
-    background: #141414;
-    color: #E50914;
-}
-
-.timeline-year {
-    color: var(--terminal-amber);
-    font-weight: bold;
-    font-size: 14px;
-}
-
-/* Netflix theme timeline year */
-:root:not(.dark) .timeline-year {
-    color: #ffffff;
-    background: #E50914;
-    padding: 2px 8px;
-    border-radius: 4px;
-    display: inline-block;
-}
-
-.timeline-title {
-    color: var(--terminal-cyan);
-    font-weight: bold;
-    margin: 4px 0;
-}
-
-/* Netflix theme timeline title */
-:root:not(.dark) .timeline-title {
-    color: #ffffff;
-}
-
-.timeline-company {
-    color: var(--terminal-text-dim);
-    font-size: 12px;
-}
-
-/* Project cards terminal styling */
-.project-card {
-    background: var(--terminal-surface);
-    border: 1px solid var(--terminal-border);
-    border-radius: 4px;
-    padding: 16px;
-    transition: border-color 0.3s ease;
-}
-
-.project-card:hover {
-    border-color: var(--terminal-green);
-    box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
-}
-
-/* Netflix theme project cards */
-:root:not(.dark) .project-card {
-    background: #1f1f1f;
-    border: 1px solid #2f2f2f;
-    box-shadow: 0 2px 8px 0 rgba(229, 9, 20, 0.15);
-    transition: all 0.3s ease;
-}
-
-:root:not(.dark) .project-card:hover {
-    border-color: #E50914;
-    box-shadow: 0 10px 20px -3px rgba(229, 9, 20, 0.3);
-    transform: translateY(-4px);
-}
-
-.project-title {
-    color: var(--terminal-cyan);
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-/* Netflix theme project title */
-:root:not(.dark) .project-title {
-    color: #E50914;
-    -webkit-background-clip: unset;
-    -webkit-text-fill-color: unset;
-    background-clip: unset;
-}
-
-.project-description {
-    color: var(--terminal-text);
-    font-size: 14px;
-    line-height: 1.5;
-    margin-bottom: 12px;
-}
-
-.project-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-}
-
-.stack-tag {
-    background: rgba(255, 176, 0, 0.1);
-    color: var(--terminal-amber);
-    padding: 2px 6px;
-    border: 1px solid rgba(255, 176, 0, 0.3);
-    border-radius: 3px;
-    font-size: 11px;
-}
-
-/* Netflix theme stack tags */
-:root:not(.dark) .stack-tag {
-    background: rgba(229, 9, 20, 0.2);
-    color: #ffffff;
-    border: 1px solid #E50914;
-    font-weight: 500;
-}
-
-/* Button styling */
-.terminal-button {
-    background: transparent;
-    border: 1px solid var(--terminal-green);
-    color: var(--terminal-green);
-    padding: 8px 16px;
-    border-radius: 4px;
-    font-family: inherit;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.terminal-button:hover {
-    background: var(--terminal-green);
-    color: var(--terminal-bg);
-}
-
-/* Netflix theme buttons */
-:root:not(.dark) .terminal-button {
-    border: 2px solid #E50914;
-    color: #E50914;
-    font-weight: 600;
-}
-
-:root:not(.dark) .terminal-button:hover {
-    background: #E50914;
-    color: #ffffff;
-    box-shadow: 0 4px 6px -1px rgba(229, 9, 20, 0.4);
-    transform: translateY(-2px);
-}
-
-/* Navigation styling */
-.terminal-nav {
-    background: var(--terminal-surface);
-    border-bottom: 1px solid var(--terminal-border);
-    backdrop-filter: blur(10px);
-}
-
-/* Netflix theme navigation */
-:root:not(.dark) .terminal-nav {
-    background: rgba(20, 20, 20, 0.95);
-    border-bottom: 1px solid #2f2f2f;
-    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.5);
+/* ─── Navigation ────────────────────────────────────────── */
+.nav-glass {
+    background: rgba(3, 7, 18, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.1);
 }
 
 .nav-link {
-    color: var(--terminal-text-dim);
+    color: var(--text-secondary);
     text-decoration: none;
-    padding: 4px 8px;
-    border-radius: 3px;
-    transition: all 0.3s ease;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+    transition: all 0.25s ease;
+    letter-spacing: 0.01em;
 }
 
 .nav-link:hover {
-    color: var(--terminal-green);
-    background: rgba(0, 255, 65, 0.1);
+    color: var(--text-primary);
+    background: rgba(139, 92, 246, 0.12);
 }
 
-/* Netflix theme - Work Experience Timeline Styling */
-:root:not(.dark) .timeline-vertical-line {
-    background-color: #E50914;
-    width: 2px;
+/* ─── Section Headings ──────────────────────────────────── */
+.section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-violet);
+    margin-bottom: 0.5rem;
 }
 
-:root:not(.dark) .timeline-dot {
-    background-color: #E50914;
-    border-color: #141414;
+.section-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
 }
 
-:root:not(.dark) .experience-card {
-    background-color: #1f1f1f;
-    border-color: #2f2f2f;
+.gradient-text {
+    background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-:root:not(.dark) .experience-header {
-    border-color: #2f2f2f;
+/* ─── Glass Cards ───────────────────────────────────────── */
+.glass-card {
+    background: rgba(15, 21, 38, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(139, 92, 246, 0.12);
+    border-radius: 1rem;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-:root:not(.dark) .experience-header:hover {
-    background-color: #2a2a2a;
+.glass-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(139,92,246,0.04) 0%, transparent 60%);
+    pointer-events: none;
 }
 
-:root:not(.dark) .experience-title {
-    color: #ffffff;
+.glass-card:hover {
+    border-color: rgba(139, 92, 246, 0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -12px rgba(139, 92, 246, 0.2);
 }
 
-:root:not(.dark) .experience-company {
-    color: #E50914;
+/* ─── Project Cards ─────────────────────────────────────── */
+.project-card {
+    background: rgba(15, 21, 38, 0.7);
+    border: 1px solid rgba(139, 92, 246, 0.12);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-:root:not(.dark) .experience-year {
-    background-color: #E50914;
-    color: #ffffff;
+.project-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(6,182,212,0.05));
+    transition: opacity 0.35s ease;
+    pointer-events: none;
 }
 
-:root:not(.dark) .experience-location-icon {
-    color: #E50914;
+.project-card:hover {
+    border-color: rgba(139, 92, 246, 0.4);
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 24px 48px -16px rgba(139, 92, 246, 0.25);
 }
 
-:root:not(.dark) .experience-location {
-    color: #b3b3b3;
+.project-card:hover::after {
+    opacity: 1;
 }
 
-:root:not(.dark) .experience-description {
-    color: #b3b3b3;
-}
-
-:root:not(.dark) .experience-details {
-    border-color: #2f2f2f;
-}
-
-:root:not(.dark) .experience-section-title {
-    color: #E50914;
-}
-
-:root:not(.dark) .experience-bullet {
-    color: #E50914;
-}
-
-:root:not(.dark) .experience-text {
-    color: #b3b3b3;
-}
-
-:root:not(.dark) .experience-tech-tag {
-    background-color: rgba(229, 9, 20, 0.2);
-    color: #ffffff;
-    border-color: #E50914;
-}
-
-:root:not(.dark) .experience-expand-btn {
-    color: #E50914;
-}
-
-:root:not(.dark) .experience-expand-btn:hover {
-    color: #ff0a16;
-}
-
-/* Netflix theme - Education Timeline Styling */
-:root:not(.dark) .education-card {
-    background-color: #1f1f1f;
-    border-color: #2f2f2f;
-}
-
-:root:not(.dark) .education-header {
-    border-color: #2f2f2f;
-}
-
-:root:not(.dark) .education-title {
-    color: #ffffff;
-}
-
-:root:not(.dark) .education-institution {
-    color: #E50914;
-}
-
-:root:not(.dark) .education-year {
-    background-color: #E50914;
-    color: #ffffff;
-}
-
-:root:not(.dark) .education-location-icon {
-    color: #E50914;
-}
-
-:root:not(.dark) .education-location {
-    color: #b3b3b3;
-}
-
-:root:not(.dark) .education-description {
-    color: #b3b3b3;
-}
-
-:root:not(.dark) .education-expand-btn {
-    color: #E50914;
-}
-
-:root:not(.dark) .education-expand-btn:hover {
-    color: #ff0a16;
-}
-
-:root:not(.dark) .education-modules {
-    background-color: #2a2a2a;
-}
-
-:root:not(.dark) .education-module-category {
-    color: #ffffff;
-    border-color: #2f2f2f;
-}
-
-:root:not(.dark) .education-module-item {
-    background-color: #1f1f1f;
-    border-color: #2f2f2f;
-}
-
-:root:not(.dark) .education-module-bullet {
-    color: #E50914;
-}
-
-:root:not(.dark) .education-module-text {
-    color: #b3b3b3;
-}
-
-
-
-/* Light theme nav links */
-:root:not(.dark) .nav-link {
-    color: #64748b;
+/* ─── Tech Tags ─────────────────────────────────────────── */
+.tech-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(139, 92, 246, 0.1);
+    color: #a78bfa;
+    padding: 0.2rem 0.6rem;
+    border-radius: 9999px;
+    font-size: 0.7rem;
     font-weight: 500;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    letter-spacing: 0.02em;
+    transition: all 0.2s ease;
 }
 
-:root:not(.dark) .nav-link:hover {
-    color: #14b8a6;
-    background: linear-gradient(135deg, #d1fae5, #dbeafe);
+.tech-tag:hover {
+    background: rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.4);
+    color: #c4b5fd;
 }
 
-/* Form styling */
-.terminal-form {
-    background: var(--terminal-surface);
-    border: 1px solid var(--terminal-border);
-    border-radius: 4px;
-    padding: 20px;
+.tech-tag-cyan {
+    background: rgba(6, 182, 212, 0.1);
+    color: #67e8f9;
+    border-color: rgba(6, 182, 212, 0.2);
 }
 
-/* Light theme forms */
-:root:not(.dark) .terminal-form {
-    background: #ffffff;
-    border: 1px solid #e0e7ff;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+/* ─── Buttons ───────────────────────────────────────────── */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    color: #ffffff;
+    padding: 0.625rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);
 }
 
-.terminal-input {
-    background: var(--terminal-bg);
-    border: 1px solid var(--terminal-border);
-    color: var(--terminal-text);
-    padding: 8px 12px;
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.45);
+    background: linear-gradient(135deg, #a78bfa, #7c3aed);
+}
+
+.btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: var(--text-primary);
+    padding: 0.625rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+    border: 1px solid rgba(139, 92, 246, 0.35);
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.btn-outline:hover {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.6);
+    transform: translateY(-2px);
+}
+
+/* ─── Timeline ──────────────────────────────────────────── */
+.timeline-line {
+    position: absolute;
+    left: 7px;
+    top: 24px;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, rgba(139,92,246,0.6), rgba(139,92,246,0.05));
+}
+
+.timeline-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 4px rgba(139,92,246,0.15);
+    margin-top: 4px;
+}
+
+/* ─── Skills ────────────────────────────────────────────── */
+.skill-group-title {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-cyan);
+    margin-bottom: 0.75rem;
+}
+
+/* ─── Scroll reveal base ────────────────────────────────── */
+.reveal {
+    opacity: 0;
+    transform: translateY(32px);
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* ─── Divider ───────────────────────────────────────────── */
+.section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(139,92,246,0.3), transparent);
+    margin: 0 auto;
+    max-width: 640px;
+}
+
+/* ─── Avatar ring ───────────────────────────────────────── */
+.avatar-ring {
+    background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+    padding: 3px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.avatar-ring img {
+    border-radius: 50%;
+    display: block;
+}
+
+/* ─── Glow accents ──────────────────────────────────────── */
+.glow-violet {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.25);
+}
+.glow-cyan {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.25);
+}
+
+/* ─── Mobile menu ───────────────────────────────────────── */
+.mobile-menu {
+    background: rgba(3, 7, 18, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+}
+
+/* ─── Contact link ──────────────────────────────────────── */
+.contact-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.contact-link:hover {
+    color: #a78bfa;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb {
+    background: rgba(139,92,246,0.3);
     border-radius: 3px;
-    font-family: inherit;
-    font-size: 14px;
-    width: 100%;
-    margin-bottom: 12px;
 }
-
-.terminal-input:focus {
-    outline: none;
-    border-color: var(--terminal-green);
-    box-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
-}
-
-/* Light theme inputs */
-:root:not(.dark) .terminal-input {
-    background: #ffffff;
-    border: 2px solid #e0e7ff;
-    color: #1e293b;
-}
-
-:root:not(.dark) .terminal-input:focus {
-    border-color: #14b8a6;
-    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
-}
-
-.terminal-textarea {
-    background: var(--terminal-bg);
-    border: 1px solid var(--terminal-border);
-    color: var(--terminal-text);
-    padding: 8px 12px;
-    border-radius: 3px;
-    font-family: inherit;
-    font-size: 14px;
-    width: 100%;
-    margin-bottom: 12px;
-    resize: vertical;
-    min-height: 100px;
-}
-
-.terminal-textarea:focus {
-    outline: none;
-    border-color: var(--terminal-green);
-    box-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
-}
-
-/* Light theme textarea */
-:root:not(.dark) .terminal-textarea {
-    background: #ffffff;
-    border: 2px solid #e0e7ff;
-    color: #1e293b;
-}
-
-:root:not(.dark) .terminal-textarea:focus {
-    border-color: #14b8a6;
-    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(139,92,246,0.5);
 }
