@@ -1,127 +1,92 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { EDUCATION } from '../config'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function Education() {
-    const [visibleItems, setVisibleItems] = useState(0)
     const [expandedModules, setExpandedModules] = useState({})
+    const containerRef = useRef(null)
 
     useEffect(() => {
-        // Shows education items progressively
-        const itemInterval = setInterval(() => {
-            setVisibleItems(prev => {
-                if (prev < EDUCATION.length) {
-                    return prev + 1
-                }
-                clearInterval(itemInterval)
-                return prev
+        if (!containerRef.current) return
+        const items = containerRef.current.querySelectorAll('.edu-item')
+        items.forEach((el, i) => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 88%',
+                    toggleActions: 'play none none none',
+                },
+                x: -30,
+                opacity: 0,
+                duration: 0.6,
+                delay: i * 0.1,
+                ease: 'power2.out',
             })
-        }, 300)
-
-        return () => clearInterval(itemInterval)
+        })
+        return () => ScrollTrigger.getAll().forEach(t => t.kill())
     }, [])
 
-    // Toggles module visibility for specific education item
-    const toggleModules = (educationIndex) => {
-        setExpandedModules(prev => ({
-            ...prev,
-            [educationIndex]: !prev[educationIndex]
-        }))
+    const toggleModules = (idx) => {
+        setExpandedModules(prev => ({ ...prev, [idx]: !prev[idx] }))
     }
 
     return (
-        <div className="space-y-8">
+        <div ref={containerRef} className="space-y-4">
             {EDUCATION.map((item, index) => (
-                <div
-                    key={index}
-                    className={`transition-all duration-500 ${
-                        index < visibleItems 
-                            ? 'opacity-100 translate-y-0' 
-                            : 'opacity-0 translate-y-4'
-                    }`}
-                    style={{ transitionDelay: `${index * 100}ms` }}
-                >
-                    {/* Modern vertical timeline bar */}
-                    <div className="relative pl-8 pb-8 timeline-education-item">
-                        {/* Vertical line */}
-                        {index < EDUCATION.length - 1 && (
-                            <div className="timeline-vertical-line absolute left-2 top-8 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-700"></div>
-                        )}
-                        
-                        {/* Timeline dot */}
-                        <div className="timeline-dot absolute left-0 top-2 w-4 h-4 rounded-full bg-blue-600 dark:bg-blue-500 border-4 border-white dark:border-slate-950"></div>
-                        
-                        <div className="education-card bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-600 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                        <div className="education-header p-6 border-b border-gray-200 dark:border-slate-600">
-                            <div className="flex flex-col space-y-3">
-                                {/* Degree title and institution */}
-                                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                                    <div className="flex-1 min-w-0">
-                                        <h3 className="education-title text-lg font-bold text-gray-900 dark:text-white">
-                                            {item.title}
-                                        </h3>
-                                        <p className="education-institution text-blue-600 dark:text-blue-400 font-semibold text-base">
-                                            {item.institution}
-                                        </p>
-                                    </div>
-                                    <div className="flex-shrink-0">
-                                        <span className="education-year text-amber-600 dark:text-amber-400 text-sm font-mono bg-amber-50 dark:bg-amber-900/20 px-2 py-1 rounded">
-                                            {item.year}
-                                        </span>
-                                    </div>
-                                </div>
+                <div key={index} className="edu-item relative pl-10">
+                    {index < EDUCATION.length - 1 && <div className="timeline-line" />}
+                    <div className="absolute left-0 top-5 timeline-dot" />
 
-                                {/* Location */}
-                                <div className="flex items-center gap-2 text-sm">
-                                    <span className="education-location-icon text-green-600 dark:text-green-400">📍</span>
-                                    <span className="education-location text-gray-600 dark:text-gray-300">{item.location}</span>
-                                </div>
+                    <div className="glass-card p-5 sm:p-6">
+                        <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
+                            <div className="flex-1 min-w-0">
+                                <h3 className="text-base font-semibold text-white mb-1">{item.title}</h3>
+                                <p className="text-violet-400 text-sm font-medium">{item.institution}</p>
+                                <p className="text-slate-500 text-xs mt-1">{item.location}</p>
                             </div>
+                            <span className="text-xs font-mono text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 px-2 py-1 rounded-md self-start flex-shrink-0">
+                                {item.year}
+                            </span>
                         </div>
-                        
-                        <div className="p-6">
-                            <p className="education-description text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-4">
-                                {item.description}
-                            </p>
 
-                            {/* Expandable Modules Section */}
-                            {item.modules && (
-                                <div className="mt-4">
-                                    <button
-                                        onClick={() => toggleModules(index)}
-                                        className="education-expand-btn flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium text-sm transition-colors"
+                        <p className="text-slate-400 text-sm leading-relaxed mt-4">{item.description}</p>
+
+                        {item.modules && (
+                            <div className="mt-4">
+                                <button
+                                    onClick={() => toggleModules(index)}
+                                    className="flex items-center gap-2 text-xs font-medium text-violet-400 hover:text-violet-300 transition-colors"
+                                >
+                                    <svg
+                                        className={`w-3.5 h-3.5 transition-transform duration-200 ${expandedModules[index] ? 'rotate-90' : ''}`}
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                     >
-                                        <span className={`transform transition-transform ${expandedModules[index] ? 'rotate-90' : ''}`}>
-                                            ▶
-                                        </span>
-                                        {expandedModules[index] ? 'Hide' : 'Click to see'} subjects/modules undertaken
-                                    </button>
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                    {expandedModules[index] ? 'Hide' : 'View'} course modules
+                                </button>
 
-                                    {expandedModules[index] && (
-                                        <div className="education-modules mt-4 space-y-4 bg-gray-50 dark:bg-slate-700 rounded-lg p-4">
-                                            {Object.entries(item.modules).map(([category, modules], categoryIndex) => (
-                                                <div key={categoryIndex} className="space-y-2">
-                                                    <h4 className="education-module-category font-semibold text-gray-900 dark:text-white text-sm border-b border-gray-200 dark:border-slate-600 pb-1">
-                                                        {category}
-                                                    </h4>
-                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                                                        {modules.map((module, moduleIndex) => (
-                                                            <div
-                                                                key={moduleIndex}
-                                                                className="education-module-item flex items-center gap-2 text-xs bg-white dark:bg-slate-800 rounded px-2 py-1 border border-gray-200 dark:border-slate-600"
-                                                            >
-                                                                <span className="education-module-bullet text-green-500 dark:text-green-400 text-xs">•</span>
-                                                                <span className="education-module-text text-gray-700 dark:text-gray-300">{module}</span>
-                                                            </div>
-                                                        ))}
-                                                    </div>
+                                {expandedModules[index] && (
+                                    <div className="mt-4 space-y-4 bg-white/[0.02] rounded-lg p-4 border border-white/5">
+                                        {Object.entries(item.modules).map(([cat, mods], ci) => (
+                                            <div key={ci}>
+                                                <h4 className="text-xs font-semibold text-slate-300 mb-2 uppercase tracking-wide">{cat}</h4>
+                                                <div className="flex flex-wrap gap-1.5">
+                                                    {mods.map((mod, mi) => (
+                                                        <span key={mi} className="text-xs bg-white/5 border border-white/10 text-slate-400 px-2 py-0.5 rounded-md">
+                                                            {mod}
+                                                        </span>
+                                                    ))}
                                                 </div>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-                            )}
-                        </div>
-                    </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
             ))}

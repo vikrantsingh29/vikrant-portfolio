@@ -11,26 +11,42 @@ export default {
                 mono: ['JetBrains Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', 'ui-monospace', 'SFMono-Regular', 'monospace']
             },
             colors: {
-                brand: {
-                    50: '#eef6ff', 100: '#d9ecff', 200: '#b6d7ff', 300: '#8dbdff', 400: '#5f9cff',
-                    500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a8a'
+                navy: {
+                    950: '#030712',
+                    900: '#0a0e1a',
+                    800: '#0f1526',
+                    700: '#141d35',
+                    600: '#1a2444',
                 },
-                terminal: {
-                    bg: '#0a0a0a',
-                    surface: '#1a1a1a',
-                    border: '#333333',
-                    green: '#00ff41',
-                    amber: '#ffb000',
-                    cyan: '#00ffff',
-                    red: '#ff4444',
-                    text: '#e0e0e0',
-                    'text-dim': '#888888'
-                }
+                accent: {
+                    violet: '#8b5cf6',
+                    cyan: '#06b6d4',
+                    blue: '#3b82f6',
+                    pink: '#ec4899',
+                },
             },
             animation: {
-                'typing': 'typing 3s steps(40, end), blink 1s infinite',
-                'blink': 'blink 1s infinite'
-            }
+                'gradient-shift': 'gradientShift 8s ease infinite',
+                'float': 'float 6s ease-in-out infinite',
+                'glow-pulse': 'glowPulse 2s ease-in-out infinite',
+            },
+            keyframes: {
+                gradientShift: {
+                    '0%, 100%': { backgroundPosition: '0% 50%' },
+                    '50%': { backgroundPosition: '100% 50%' },
+                },
+                float: {
+                    '0%, 100%': { transform: 'translateY(0px)' },
+                    '50%': { transform: 'translateY(-10px)' },
+                },
+                glowPulse: {
+                    '0%, 100%': { opacity: '0.6', transform: 'scale(1)' },
+                    '50%': { opacity: '1', transform: 'scale(1.05)' },
+                },
+            },
+            backgroundSize: {
+                '300%': '300%',
+            },
         },
     },
     darkMode: 'class',
